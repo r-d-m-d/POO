@@ -1,4 +1,8 @@
 class Email():
+    __idc = ""
+    __dom = ""
+    __tipo = ""
+    __cont = ""
     def __init__(self, idc="", dom="", tipo="", cont="1234"):
         self.__idc = idc
         self.__dom = dom
@@ -12,11 +16,11 @@ class Email():
         return self.__dom
 
     def crearCuenta(self, correo, cont="default"):
-        atidx = correo.index("@")
-        self.__idc = correo[0:atidx]
-        domIdx = correo.index(".")
-        self.__dom = correo[atidx+1:domIdx]
-        self.__tipo = correo[domIdx+1:]
+        sat = correo.split("@")
+        self.__idc = sat[0]
+        domIdx = sat[1].index('.')
+        self.__dom = sat[1][0:domIdx]
+        self.__tipo = sat[1][domIdx+1:]
         self.__cont = cont
 
     def esContrasena(self, cont):
