@@ -28,14 +28,15 @@ siguiente diseño de clase:
 
 Métodos:
 
-a- El constructor. b- “cantidadTotaldeMillas”, retorna la cantidad de millas
-acumuladas. c- “acumularMillas”, recibe como parámetro la cantidad de millas
+a- El constructor. 
+b- “cantidadTotaldeMillas”, retorna la cantidad de millas acumuladas. 
+c- “acumularMillas”, recibe como parámetro la cantidad de millas
 recorridas, las suma en el atributo correspondiente y retorna el valor del
-atributo actualizado. d- “canjearMillas”, recibe como parámetro la cantidad de
-millas a canjear. Para utilizar las millas debe verificarse que la cantidad a
-canjear sea menor o igual a la cantidad de millas acumuladas, caso contrario
-mostrar un mensaje de error en la operación. Retorna el valor de la cantidad de
-millas acumuladas.
+atributo actualizado. 
+d- “canjearMillas”, recibe como parámetro la cantidad de millas a canjear. Para
+utilizar las millas debe verificarse que la cantidad a canjear sea menor o
+igual a la cantidad de millas acumuladas, caso contrario mostrar un mensaje de
+error en la operación. Retorna el valor de la cantidad de millas acumuladas.
 
 Implemente un programa que:
 
@@ -52,7 +53,9 @@ b- Acumular Millas.
 c- Canjear Millas.
 
 3- Represente el almacenamiento en memoria para la lista cargada con 4
-viajeros. 4- Realice el Diagrama de Secuencia que corresponde a cada una de las
+viajeros.
+
+4- Realice el Diagrama de Secuencia que corresponde a cada una de las
 siguientes funcionalidades:
 
 4.1- El usuario elige la opción Acumular Millas, el sistema solicita el número

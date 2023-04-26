@@ -18,9 +18,13 @@ class ViajeroFrecuente():
     def acumularMillas(self, mill):
         return self.__millas_acum+mill
 
+    def puedeCanjear(self, millas):
+        return self.__millas_acum >= millas
+
     def canjearMillas(self, millas_canje):
-        if self.__millas_acum >= millas_canje:
+        if self.puedeCanjear(millas_canje):
             self.__millas_acum -= millas_canje
         return self.__millas_acum
 
-
+    def tieneNumero(self, numero):
+        return numero == self.__num_viajero
