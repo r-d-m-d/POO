@@ -21,13 +21,19 @@ class ControladorViajeroFrecuente():
         fp.close()
 
     def buscarViajeroPorNumero(self, num):
-        return [v for v in self.__listaViajeros if v.tieneNumero(num)]
+        v = None
+        i = 0
+        while i < len(self.__listaViajeros) and not self.__listaViajeros[i].tieneNumero(num) :
+            i += 1
+        if i < len(self.__listaViajeros):
+            v = self.__listaViajeros[i]
+        return v
 
     def consultarMillas(self, num_viajero):
         millas = None
         v = self.buscarViajeroPorNumero(num_viajero)
-        if v != []:
-            millas = v[0].cantidadTotalDeMillas()
+        if v is not None:
+            millas = v.cantidadTotalDeMillas()
         return millas
 
     def acumularMillas(self, num_viajero, millas):
@@ -35,8 +41,8 @@ class ControladorViajeroFrecuente():
             millas = None
         else:
             v = self.buscarViajeroPorNumero(num_viajero)
-            if v != []:
-                vi: ViajeroFrecuente.ViajeroFrecuente = v[0]
+            if v is not None:
+                vi: ViajeroFrecuente.ViajeroFrecuente = v
                 millas = vi.acumularMillas(millas)
         return millas
 
@@ -45,7 +51,7 @@ class ControladorViajeroFrecuente():
             millas = None
         else:
             v = self.buscarViajeroPorNumero(num)
-            if v != []:
+            if v is not None:
                 millas = v[0].canjearMillas(millas)
             else:
                 millas = None

@@ -6,8 +6,8 @@ if __name__ == "__main__":
     cvf.cargarViajeros("viajerosFrecuentes.csv")
     vid = int(input("ingrese un id de viajero frecuente: "))
     viajeros = cvf.buscarViajeroPorNumero(vid)
-    if viajeros != []:
-        viajero: ViajeroFrecuente.ViajeroFrecuente = viajeros[0]
+    if viajeros is not None:
+        viajero: ViajeroFrecuente.ViajeroFrecuente = viajeros
         del cvf
         del viajeros
         print("a- Consultar cantidad de millas")
