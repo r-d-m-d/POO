@@ -16,7 +16,8 @@ class ViajeroFrecuente():
         return self.__millas_acum
 
     def acumularMillas(self, mill):
-        return self.__millas_acum+mill
+        self.__millas_acum += mill
+        return self.__millas_acum
 
     def puedeCanjear(self, millas):
         return self.__millas_acum >= millas
@@ -33,11 +34,14 @@ class ViajeroFrecuente():
         return self.__millas_acum > otro.__millas_acum
 
     def __add__(self, millas):
-        if type(millas) == type(int):
+        if type(millas) == int:
             self.acumularMillas(millas)
         return self
 
     def __sub__(self, millas):
-        if type(millas) == type(int):
+        if type(millas) == int:
             self.canjearMillas(millas)
         return self
+
+    def __str__(self):
+        return f"{self.__num_viajero}   {self.__dni}   {self.__nombre}   {self.__apellido}   {self.__millas_acum}"
