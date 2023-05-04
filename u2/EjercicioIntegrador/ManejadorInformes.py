@@ -10,9 +10,6 @@ class ManejadorInforme:
 
     def hacerInformesDe(self,materia):
         mats = self.__mmat.promocionalesDe(materia) 
-        print("ManejadorInforme -> HacerInformesDe")
-        for x in mats:
-            print(f"{x.dni()} {x.nota()} {x.nombre()}")
         for m in mats:
             alu = self.__malu.obtenerAlumno(m.dni())
             print(f"{alu.nya()}")
