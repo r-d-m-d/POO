@@ -2,7 +2,13 @@ import csv
 import Registro
 
 FILENAME = "varmet.csv"
+
+def test():
+    r = Registro.Registro(1,2,3)
+    mm = Resgistro.MaxMin(1,2)
+    vdh = Registro.ValDiaHora()
 if __name__ == "__main__":
+    test()
     dia = []
     horas = []
     with open(FILENAME) as fp:
