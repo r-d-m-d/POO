@@ -7,8 +7,11 @@ from ManejadorInformes import ManejadorInforme
 ALUMNOS_FILE = "alumnos.csv"
 MATERIAS_FILE = "materiasAprobadas.csv"
 def test():
-    pass
+    m = ManejadorAlumnos()
+    mm = ManejadorMateria()
+    mi = ManejadorInforme
 if __name__ == "__main__":
+    test()
     mmat = ManejadorMateria()
     mmat.cargarMaterias(MATERIAS_FILE)
     malu = ManejadorAlumnos()
@@ -27,7 +30,7 @@ if __name__ == "__main__":
     elif opc == "b":
         nmat = input("Ingrese el nombre de una materia: ")
         informes =  minfo.hacerInformesDe(nmat)
-        print("{:10}\t{:18}\t{:12}\t{:7}\t{:5}".format("DNI", "Apellido y Nombre", "Fecha", "Nota", "Año"))
+        print("{:^10}\t{:^18}\t{:^12}\t{:^7}\t{:^5}".format("DNI", "Apellido y Nombre", "Fecha", "Nota", "Año"))
         for x in informes:
             print(x)
         
