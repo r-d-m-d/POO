@@ -1,9 +1,13 @@
 import ViajeroFrecuente
 import ControladorViajeroFrecuente
 
+VIAJEROS_FILE = "viajerosFrecuentes.csv"
+def test():
+    v = ViajeroFrecuente.ViajeroFrecuente(1,"12345","Juan","Perez",1234)
 if __name__ == "__main__":
+    test()
     cvf = ControladorViajeroFrecuente.ControladorViajeroFrecuente()
-    cvf.cargarViajeros("viajerosFrecuentes.csv")
+    cvf.cargarViajeros(VIAJEROS_FILE)
     vid = int(input("ingrese un id de viajero frecuente: "))
     viajeros = cvf.buscarViajeroPorNumero(vid)
     if viajeros is not None:
