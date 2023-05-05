@@ -24,7 +24,7 @@ if __name__ == "__main__":
 # resta (-). Teniendo en cuenta que el resultado de la diferencia de conjuntos 
 # es un nuevo conjunto que posee los elementos del primer operando que no se
 # encuentren en el segundo operando. Ejemplo: Sea A={1,2,3,4} y B= {3,6,9},
-# A-B = {1,2} #### ERROR A-B = {1,2,4} ### consulta
+# A-B = {1,2,4}
     C1 = Conjunto([1, 2, 4])
     print("A-B= ", A-B, " C: ", C1)
     assert (A-B) == C1
