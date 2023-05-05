@@ -1,11 +1,14 @@
 import csv
 import PlanAhorro
-
+FILENAME = "planes.csv"
+def test():
+    pa = PlanAhorro(1,"Toyota"," final",70987431)
 if __name__ == "__main__":
 # 1-Lea desde un archivo separado con “;” los datos de los planes y genere
 # una lista que almacene instancias de la clase “PlanAhorro”.
+    test()
     listaPlanes = []
-    with open("planes.csv") as fp:
+    with open(FILENAME) as fp:
         reader = csv.reader(fp, delimiter=";")
         for fila in reader:
             cod = int(fila[0])
@@ -14,7 +17,7 @@ if __name__ == "__main__":
             ncl = int(fila[5])
             listaPlanes.append(
                     PlanAhorro.PlanAhorro(cod, fila[1], fila[2],
-                                          importe, nc, ncl))
+                                          importe))
 # 2-Presente un menú de opciones permita:
     print("a)Actualizar valor del vehiculo de cada plan")
     print("b)Mostrar vehiculos por debajo de un valor")
@@ -40,17 +43,9 @@ if __name__ == "__main__":
     elif opc == "c":
         pass # Consultar: cual vehiculo ? ingreso un codigo? muestro todos?
 # d.Dado el código de un plan, modificar la cantidad cuotas que debe tener
-# pagas para licitar.
+# pagas para licitar. #### modificarlo para todos ####
     elif opc == "d":
-        cod = int(input("Ingrese un codigo: "))
-        plan = None
-        i = 0
-        while i < len(listaPlanes) and listaPlanes[i].codigo() == cod :
-            i += 1
-        if i < len(listaPlanes):
-            nc = int(input("ingrese la nueva cantidad de cuotas para licitar: "))
-            listaPlanes[i].ncuotaslic(ncl=nc)
-        else:
-            print("Plan no encontrado")
+        nc = int(input("ingrese la nueva cantidad de cuotas para licitar: "))
+        PlanAhorro.ncuotaslic(ncl=nc)
     else:
         print(f"Opcion {opc} invalida.")
