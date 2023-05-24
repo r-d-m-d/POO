@@ -20,7 +20,7 @@ class Taller:
     def montoInsc(self):
         return self.__montoInsc
 
-    def decVacates(self):
+    def decVacantes(self):
         self.__vac -= 1
 
     def __str__(self):
