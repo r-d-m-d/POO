@@ -24,12 +24,12 @@ if __name__ == "__main__":
     lp.append(p)
     # maneja taller > mostrar talleres
     mt.mostrarTalleres()
-    tid = input("Ingrese el id de un taller: ")
+    tid = int(input("Ingrese el id de un taller: "))
     # maneja taller > buscaTallerPorId
     i = 0
     taller = mt.buscaTallerPorId(tid)
     if taller is not None:
-        # FIXME: como fecha python
+        # FIXME: fecha python
         inscr = Inscripcion.Inscripcion("0", p, taller)
         li.append(inscr)
 
@@ -71,6 +71,6 @@ if __name__ == "__main__":
         for insc in li:
             dni = insc.persona().dni()
             idt = insc.taller().idTaller()
-            fecha = insc.fecha()
+            fecha = insc.fechaInsc()
             pago = insc.pago()
             writer.writerow([dni, idt, fecha, pago])
