@@ -33,7 +33,7 @@ if __name__ == "__main__":
         inscr = Inscripcion.Inscripcion("0", p, taller)
         li.append(inscr)
 
-# Consultar inscripcion: Ingresar DNI de una persona, si esta inscripta 
+# 3) Consultar inscripcion: Ingresar DNI de una persona, si esta inscripta 
 # mostrar el nombre del taller en el que se inscribio y el monto que adeuda
     dni = input("Ingrese el dni: ")
     # maneja inscripciones > busca dni (dni)
@@ -44,7 +44,7 @@ if __name__ == "__main__":
         print(li[i].taller().nomb())
         print(li[i].taller().montoInsc())
 
-# Consultar inscriptos. Ingresar el identificador de un taler y listar los 
+# 5) Consultar inscriptos. Ingresar el identificador de un taler y listar los 
 # datos de los alumnos que se inscribieron en el
     mt.mostrarTalleres()
     tid = input("Ingrese el id de un taller: ")
@@ -55,7 +55,7 @@ if __name__ == "__main__":
         if insc.taller().idTaller() == tid:
             print(insc.persona())
 
-# Registrar pago: Ingresar el DNI de una persona y registrar el pago
+# 6) Registrar pago: Ingresar el DNI de una persona y registrar el pago
     dni = input("Ingrese el dni para registrar pago: ")
     i = 0
     # maneja inscripciones > mostrarInscripcionesTaller
@@ -63,8 +63,8 @@ if __name__ == "__main__":
         i += 1
     if i < len(li) and li[i].persona().dni() == dni:
         li[i].registrarPago()
-# Guardar inscripciones: generar un nuevo archivo que contenga los siguientes
-# datos de las inscripciones: DNI,idTaller,fechaInscripcion y pago
+# 7) Guardar inscripciones: generar un nuevo archivo que contenga los 
+# siguientes datos de las inscripciones: DNI,idTaller, fechaInscripcion y pago
     # Guardar inscripciones
     with open("inscripciones.csv", "w") as fp:
         writer = csv.writer(fp)
