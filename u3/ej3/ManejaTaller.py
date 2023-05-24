@@ -12,10 +12,11 @@ class ManejaTaller:
     def cargarArchivo(self, narch):
         with open(narch) as fp:
             n = fp.readline()
+            n = n.strip()
             idx = 0
             if n.isdigit():
                 ntalleres = int(n)
-                self.__aTaller = np.array(ntalleres, dtype=Taller.Taller)
+                self.__aTaller = np.zeros(ntalleres, dtype=Taller.Taller)
                 reader = csv.reader(fp)
                 for line in reader:
                     idt = int(line[0])
