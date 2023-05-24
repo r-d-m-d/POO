@@ -22,3 +22,6 @@ class Taller:
 
     def decVacates(self):
         self.__vac -= 1
+
+    def __str__(self):
+        return f"{self.__idTaller}) {self.__nomb}"
