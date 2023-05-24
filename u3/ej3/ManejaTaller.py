@@ -30,3 +30,11 @@ class ManejaTaller:
         for t in self.__aTaller:
             print(f"{t}")
 
+    def buscaTallerPorId(self, tid):
+        i = 0
+        while i < len(self.__aTaller) and self.__aTaller[i].idTaller() != tid:
+            i += 1
+        taller = None
+        if i < len(self.__aTaller) and self.__aTaller[i].idTaller() == tid:
+            taller = self.__aTaller[i]
+        return taller
