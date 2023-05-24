@@ -1,10 +1,12 @@
 from Taller import Taller
 from Persona import Persona
 
+
 class Inscripcion:
+    __taller: Taller
+    __persona: Persona
 
-
-    def __init__(self,fechaInsc, persona, taller):
+    def __init__(self, fechaInsc, persona, taller):
         self.__fechaInsc = fechaInsc
         self.__pago = False
         self.__persona = persona
