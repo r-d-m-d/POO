@@ -25,6 +25,7 @@ if __name__ == "__main__":
     else:
         print("Tarea no encontrada")
 
+    print("Empleados ayuda economica.")
     for emp in mc.cobranMenosDe(150000):
         print(emp)
     for emp in mdp.cobranMenosDe(150000):
@@ -32,6 +33,7 @@ if __name__ == "__main__":
     for emp in mext.cobranMenosDe(150000):
         print(emp)
 
+    print("Calculo de sueldo")
     for e in mc.mostrarSueldo():
         print(e)
     for e in mdp.mostrarSueldo():
