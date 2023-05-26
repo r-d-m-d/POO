@@ -15,3 +15,13 @@ DEPLFN = "planta.csv"
 EXTEFN = "externos.csv"
 
 if __name__ == "__main__":
+    mc = ManejaContratados()
+    mc.cargaContratados(CONTFN)
+    mdp = ManejaDePlanta()
+    mc.cargaContratados(DEPLFN)
+    mext = ManejaExterno()
+    mext.cargaContratados(EXTEFN)
+
+    dni = input("ingrese dni: ")
+    horas = int(input("ingrese horas trabajadas: "))
+    mc.agregarHoras(dni, horas)
