@@ -5,6 +5,7 @@ import Taller
 import Persona
 import Inscripcion
 import ManejaTaller
+import ManejaInscripciones
 FN = "talleres.csv"
 if __name__ == "__main__":
 #1) Cargar los datos de los talleres en la clase TallerCapacitacion 
@@ -14,7 +15,8 @@ if __name__ == "__main__":
     mt.cargarArchivo(FN)
 # fin 1)
     lp = []
-    li = []
+    li = ManejaInscripciones.ManejaInscipciones(shape=1,
+                                                dtype = Inscripcion.Inscripcion)
 # 2) Inscirbir una persona en un taller. Se registra la inscripcion (sin pagar)
 #y la candtidad de vacantes en el taller debe ser actualizada
     nombre = input("Ingrese el nombre de la persona: ")
