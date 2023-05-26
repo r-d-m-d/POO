@@ -1,11 +1,3 @@
-import typing
-import csv
-
-import Empleado
-from Contratado import Contratado
-from DePlanta import DePlanta
-from Externo import Externo
-
 from ManejaExterno import ManejaExterno
 from ManejaDePlanta import ManejaDePlanta
 from ManejaContratados import ManejaContratados
@@ -28,7 +20,10 @@ if __name__ == "__main__":
 
     tarea = input("\nIngrese una tarea: ")
     ext = mext.totalTarea(tarea)
-    print(f"{ext.tarea()} {ext.costoObra()}\n")
+    if ext is not None:
+        print(f"{ext.tarea()} {ext.costoObra()}\n")
+    else:
+        print("Tarea no encontrada")
 
     for emp in mc.cobranMenosDe(150000):
         print(emp)
