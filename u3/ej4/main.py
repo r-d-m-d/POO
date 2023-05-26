@@ -25,3 +25,9 @@ if __name__ == "__main__":
     dni = input("ingrese dni: ")
     horas = int(input("ingrese horas trabajadas: "))
     mc.agregarHoras(dni, horas)
+
+    tarea = input("Ingrese una tarea: ")
+    ext = mext.totalTarea(tarea)
+    print(f"{ext.tarea()} {ext.costoObra()}")
+
+

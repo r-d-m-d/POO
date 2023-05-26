@@ -1,7 +1,9 @@
+from datetime import date
 import Empleado
 
 
 class Externo(Empleado.Empleado):
+    __hoy = f"{date.today()}"
 
     def __init__(self, dni: str, nomb: str, dire: str, tel: str,
                  tarea: str, fi: str, ff: str, mviatico: int, costoObra: int,
@@ -36,10 +38,15 @@ class Externo(Empleado.Empleado):
     def sueldo(self) -> int:
         return self.__sueldo
 
+    def tareaFinalizada(self) -> bool:
+        return self.__ff < Externo.hoy()
 
+    def tieneTarea(self, tarea: str) -> bool:
+        return self.__tarea == tarea
 
-
-
+    @classmethod
+    def hoy(cls):
+        return cls.__hoy
 
 
 
