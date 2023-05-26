@@ -30,7 +30,7 @@ class Contratado(Empleado.Empleado):
         return self.__sueldo
 
     def tieneDni(self, dni: str):
-        return super.dni() == dni
+        return self.dni() == dni
 
     def agregarHoras(self, horas: int):
         self.__horas += horas

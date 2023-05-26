@@ -21,4 +21,5 @@ class Empleado:
     def tel(self) -> str:
         return self.__tel
 
-
+    def __str__(self) -> str:
+        return f"{self.__nomb} {self.__dire} {self.__dni}"

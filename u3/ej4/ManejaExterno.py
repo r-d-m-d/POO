@@ -1,7 +1,8 @@
 import typing
 import csv
 
-import Externo.Externo
+from Externo import Externo
+from Empleado import Empleado
 
 
 class ManejaExterno:
@@ -10,15 +11,16 @@ class ManejaExterno:
     def __init__(self):
         self.__lext: typing.List[Externo] = []
 
-    def cargaContratados(self, fn):
+    def cargarEmpleados(self, fn):
         with open(fn) as fp:
             reader = csv.reader(fp)
             for line in reader:
-                mviatico = int(line[6])
-                costoObra = int(line[7])
-                montoSDV = int(line[8])
+                print(line)
+                mviatico = int(line[7])
+                costoObra = int(line[8])
+                montoSDV = int(line[9])
                 ext = Externo(line[0], line[1], line[2], line[3],
-                              line[4], line[5], mviatico, costoObra, montoSDV)
+                              line[4], line[5],line[6], mviatico, costoObra, montoSDV)
                 self.__lext.append(ext)
 
     def totalTarea(self, tarea: str):
@@ -33,5 +35,8 @@ class ManejaExterno:
             ext = self.__lext[i]
         return ext
 
+    def cobranMenosDe(self, sueldo: int) -> typing.List[Empleado]:
+        return [emp for emp in self.__lext if emp.sueldo() < sueldo]
 
-
+    def mostrarSueldo(self):
+        return [f"{e.nomb()} {e.tel()} {e.sueldo()}" for e in self.__lext]

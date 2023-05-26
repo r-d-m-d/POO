@@ -8,7 +8,7 @@ class Externo(Empleado.Empleado):
     def __init__(self, dni: str, nomb: str, dire: str, tel: str,
                  tarea: str, fi: str, ff: str, mviatico: int, costoObra: int,
                  montoSDV: int) -> None:
-        super().init(dni, nomb, dire, tel)
+        super().__init__(dni, nomb, dire, tel)
         self.__tarea = tarea
         self.__fi = fi
         self.__ff = ff

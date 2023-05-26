@@ -2,6 +2,7 @@ import typing
 import csv
 
 from Contratado import Contratado
+from Empleado import Empleado
 
 
 class ManejaContratados:
@@ -10,7 +11,7 @@ class ManejaContratados:
     def __init__(self):
         self.__lcont: typing.List[Contratado.Contratado] = []
 
-    def cargaContratados(self, fn):
+    def cargarEmpleados(self, fn):
         with open(fn) as fp:
             reader = csv.reader(fp)
             for line in reader:
@@ -30,4 +31,8 @@ class ManejaContratados:
             emp = True
         return emp
 
+    def cobranMenosDe(self, sueldo: int) -> typing.List[Empleado]:
+        return [emp for emp in self.__lcont if emp.sueldo() < sueldo]
 
+    def mostrarSueldo(self):
+        return [f"{e.nomb()} {e.tel()} {e.sueldo()}" for e in self.__lcont]
