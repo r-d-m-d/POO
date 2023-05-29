@@ -67,6 +67,8 @@ class Lista:
         print(elem)
 
     def __iter__(self):
+        self.__actual = self.__inicio
+        self.__indice = 0
         return self
 
     def __next__(self):
