@@ -21,10 +21,11 @@ class Vehiculo:
     def precio(self):
         return self.__precio
 
+    def tipo(self):
+        pass
 
-
-
-
+    def __str__(self):
+        return f"{self.__modelo} {self.__numero_puertas} {self.__color} {self.__precio}"
 
 
 
