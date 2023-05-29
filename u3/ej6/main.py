@@ -10,7 +10,7 @@ from Usados import Usado
 class Main:
 
     def __init__(self):
-        pass
+        self.__lista_vehiculos = Lista()
 
     def main(self):
         pass
@@ -18,12 +18,45 @@ class Main:
     def menuPrincipal(self):
         pass
 
+    def cargarJson(self, jsonFn):
+        with open(jsonFn) as fp:
+            data = json.load(fp)
 
-    def cargarJson(self):
-        pass
+        for vehiculo_data in data:
+            modelo = vehiculo_data["modelo"]
+            puertas = vehiculo_data["puertas"]
+            color = vehiculo_data["color"]
+            precio = vehiculo_data["precio"]
 
+            if vehiculo_data["__class__"] == "Nuevos":
+                version = vehiculo_data["version"]
+                vehiculo = Nuevos(modelo, puertas, color, precio, version)
+            elif vehiculo_data["__class__"] == "Usado":
+                marca = vehiculo_data["marca"]
+                patente = vehiculo_data["patente"]
+                anio = vehiculo_data["anio"]
+                kilometraje = vehiculo_data["kilometraje"]
+                vehiculo = Usado(modelo, puertas, color, precio, marca,
+                                 patente, anio, kilometraje)
+            nodo = Nodo(vehiculo)
+            self.__lista_vehiculos.agregarElemento(nodo)
 
+    def insertarVehiculo(self):
+        v = None
+        pos = int(input("ingrese la pocicion a insertar el vehiculo: "))
+        print("1) Nuevo")
+        print("2) Usado")
+        opc = input("Ingrese una opcion: ")
+        if opc == "1":
+            v = self.crearNuevo()
+        elif opc == "2":
+            v = self.crearUsado()
+        if v is not None:
+            nv = Nodo(v)
+            self.__lista_vehiculos.insertarElemento(nv, pos)
 
+jsonFn = "vehiculos.json"
 
-
-
+if __name__ == "__main__":
+    m = Main()
+    m.cargarJson(jsonFn)
