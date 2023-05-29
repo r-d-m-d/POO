@@ -21,6 +21,28 @@ class Nuevos(Vehiculo):
     def importeVenta(self):
         return self.__importe_venta
 
+    def tipo(self):
+        return "Nuevos"
+
+    def __str__(self):
+        r = super().__str__()
+        r += f"{self.__version} {self.__importe_venta}"
+        return r
+
+    def toJson(self):
+        d = dict(
+                __class__ = self.__class__.__name__,
+                __atributos__ = dict(
+                    modelo = self.modelo(),
+                    numero_puertas = self.numeroPuertas(),
+                    color = self.color(),
+                    precio = self.precio(),
+                    version = self.__version
+
+                        )
+                )
+        return d
+
     @classmethod
     def fijarMarca(cls, marca):
         cls.__marca = marca
