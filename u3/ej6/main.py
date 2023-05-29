@@ -18,6 +18,26 @@ class Main:
     def menuPrincipal(self):
         pass
 
+    def crearNuevo(self):
+        modelo = input("ingrese el modelo: ")
+        np = int(input("ingrese el numero de puertas: "))
+        color = input("Ingrese el color: ")
+        precio = int(input("precio: "))
+        version = input("version: ")
+        return Nuevos(modelo, np, color, precio, version)
+
+    def crearUsado(self):
+        modelo = input("ingrese el modelo: ")
+        np = int(input("ingrese el numero de puertas: "))
+        color = input("Ingrese el color: ")
+        precio = int(input("precio: "))
+        marca = input("marca: ")
+        patente = input("patente: ")
+        anio = int(input("Año: "))
+        kilom = int(input("Kilometraje: "))
+        return Usado(modelo, np, color, precio, marca, patente, anio, kilom)
+
+
     def cargarJson(self, jsonFn):
         with open(jsonFn) as fp:
             data = json.load(fp)
