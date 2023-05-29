@@ -55,8 +55,21 @@ class Main:
             nv = Nodo(v)
             self.__lista_vehiculos.insertarElemento(nv, pos)
 
+    def agregarVehiculo(self):
+        v = None
+        print("1) Nuevo")
+        print("2) Usado")
+        opc = input("Ingrese una opcion: ")
+        if opc == "1":
+            v = self.crearNuevo()
+        elif opc == "2":
+            v = self.crearUsado()
+        if v is not None:
+            self.__lista_vehiculos.agregarVehiculo(v)
+
 jsonFn = "vehiculos.json"
 
 if __name__ == "__main__":
     m = Main()
     m.cargarJson(jsonFn)
+    m.main()
