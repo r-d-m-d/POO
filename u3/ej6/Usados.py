@@ -34,3 +34,26 @@ class Usado(Vehiculo):
     def __descuento(self):
         descu = (Usado.__anio - self.__anio) / 100
         return descu if self.__kilometraje > 100000 else 2 * descu
+
+    def tipo(self):
+        return "Usado"
+
+    def __str__(self):
+        r = super().__str__()
+        r += f"{self.__marca} {self.__patente} {self.__anio} {self.__kilometraje} {self.__importe_venta}"
+        return r
+
+    def toJson(self):
+        d = dict(
+                __class__ = self.__class__.__name__,
+                __atributos__ = dict(
+                    modelo = self.modelo(),
+                    numero_puertas = self.numeroPuertas(),
+                    color = self.color(),
+                    precio = self.precio(),
+                    marca = self.marca(),
+                    anio = self.__anio,
+                    kilometraje = self.__kilometraje
+                    )
+                )
+        return d
