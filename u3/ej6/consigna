@@ -44,12 +44,19 @@ vehículos de la concesionaria.
 
 c) Implemente un programa que a través de un menú de opciones permita:
 
-    Insertar un vehículo en la colección en una posición determinada. Agregar
-    un vehículo a la colección. Dada una posición de la Lista: Mostrar por
-    pantalla qué tipo de objeto se encuentra almacenado en dicha posición. Dada
-    la patente de un vehículo usado, modificar el precio base, y luego mostrar
-    el precio de venta. Mostrar todos los datos, incluido el importe de venta,
-    del vehículo más económico. Mostrar para todos los vehículos que la
-    concesionaria tiene a la venta, modelo, cantidad de puertas e importe de
-    venta. Almacenar los objetos de la colección Lista en el archivo
+    1) Insertar un vehículo en la colección en una posición determinada. 
+
+    2) Agregar un vehículo a la colección. 
+
+    3) Dada una posición de la Lista: Mostrar por pantalla qué tipo de objeto
+    se encuentra almacenado en dicha posición.
+
+    4) Dada la patente de un vehículo usado, modificar el precio base, y luego
+    mostrar el precio de venta.
+
+    5) Mostrar todos los datos, incluido el importe de venta, del vehículo más
+    económico. 
+    6) Mostrar para todos los vehículos que la concesionaria tiene a la venta,
+    modelo, cantidad de puertas e importe de venta.
+    7)  Almacenar los objetos de la colección Lista en el archivo
     “vehiculos.json”.
