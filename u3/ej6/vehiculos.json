@@ -1,0 +1,71 @@
+[
+  {
+    "__class__": "Nuevo",
+    "marca": "Marca1",
+    "modelo": "Palio",
+    "cantidad_puertas": 4,
+    "color": "Rojo",
+    "precio_base": 20000,
+    "version": "Base"
+  },
+  {
+    "__class__": "Nuevo",
+    "marca": "Marca2",
+    "modelo": "Focus",
+    "cantidad_puertas": 5,
+    "color": "Azul",
+    "precio_base": 25000,
+    "version": "Full"
+  },
+  {
+    "__class__": "Nuevo",
+    "marca": "Marca3",
+    "modelo": "Golf",
+    "cantidad_puertas": 3,
+    "color": "Blanco",
+    "precio_base": 30000,
+    "version": "Base"
+  },
+  {
+    "__class__": "Nuevo",
+    "marca": "Marca4",
+    "modelo": "Civic",
+    "cantidad_puertas": 4,
+    "color": "Negro",
+    "precio_base": 35000,
+    "version": "Full"
+  },
+  {
+    "__class__": "Usado",
+    "marca": "Marca5",
+    "modelo": "Corsa",
+    "cantidad_puertas": 3,
+    "color": "Gris",
+    "precio_base": 12000,
+    "patente": "ABC123",
+    "anio": 2015,
+    "kilometraje": 90000
+  },
+  {
+    "__class__": "Usado",
+    "marca": "Marca6",
+    "modelo": "Fiesta",
+    "cantidad_puertas": 5,
+    "color": "Plata",
+    "precio_base": 15000,
+    "patente": "XYZ789",
+    "anio": 2017,
+    "kilometraje": 80000
+  },
+  {
+    "__class__": "Usado",
+    "marca": "Marca7",
+    "modelo": "Astra",
+    "cantidad_puertas": 4,
+    "color": "Verde",
+    "precio_base": 10000,
+    "patente": "DEF456",
+    "anio": 2012,
+    "kilometraje": 120000
+  }
+]
