@@ -2,7 +2,7 @@ from Vehiculo import Vehiculo
 
 
 class Nodo:
-    __empleado: Vehiculo
+    __vehiculo: Vehiculo
     __siguiente: object
 
     def __init__(self, vehiculo):
