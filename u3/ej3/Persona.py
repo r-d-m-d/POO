@@ -15,5 +15,5 @@ class Persona:
 
     def dni(self):
         return self.__dni
-
-
+    def __str__(self):
+        return f"{self.__nom} {self.__dire} {self.__dni}"
