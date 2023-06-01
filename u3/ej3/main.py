@@ -15,8 +15,7 @@ if __name__ == "__main__":
     mt.cargarArchivo(FN)
 # fin 1)
     lp = []
-    li = ManejaInscripciones.ManejaInscipciones(shape=1,
-                                                dtype = Inscripcion.Inscripcion)
+    mi = ManejaInscripciones.ManejaInscipciones()
 # 2) Inscirbir una persona en un taller. Se registra la inscripcion (sin pagar)
 #y la candtidad de vacantes en el taller debe ser actualizada
     nombre = input("Ingrese el nombre de la persona: ")
@@ -33,46 +32,26 @@ if __name__ == "__main__":
     if taller is not None:
         # FIXME: fecha python
         inscr = Inscripcion.Inscripcion("0", p, taller)
-        li.append(inscr)
+        mi.agregarInscripcion(inscr)
 
 # 3) Consultar inscripcion: Ingresar DNI de una persona, si esta inscripta 
 # mostrar el nombre del taller en el que se inscribio y el monto que adeuda
     dni = input("Ingrese el dni: ")
     # maneja inscripciones > busca dni (dni)
-    i = 0
-    while i < len(li) and li[i].persona().dni() != dni:
-        i += 1
-    if i < len(li) and li[i].persona().dni() == dni:
-        print(li[i].taller().nomb())
-        print(li[i].taller().montoInsc())
-
+    print(mi.consultarInscripcion(dni))
 # 5) Consultar inscriptos. Ingresar el identificador de un taler y listar los 
 # datos de los alumnos que se inscribieron en el
     mt.mostrarTalleres()
     tid = input("Ingrese el id de un taller: ")
-    i = 0
 #  FIXME: INEFICIENTE: hay menos talleres que inscripciones
     # controla inscripciones > mostrar inscripciones de taller(tid)
-    for insc in li:
-        if insc.taller().idTaller() == tid:
-            print(insc.persona())
-
+    mi.consultarInscriptos(tid)
 # 6) Registrar pago: Ingresar el DNI de una persona y registrar el pago
     dni = input("Ingrese el dni para registrar pago: ")
     i = 0
     # maneja inscripciones > mostrarInscripcionesTaller
-    while i < len(li) and li[i].persona().dni() != dni:
-        i += 1
-    if i < len(li) and li[i].persona().dni() == dni:
-        li[i].registrarPago()
+    mi.registrarPago(dni)
 # 7) Guardar inscripciones: generar un nuevo archivo que contenga los 
 # siguientes datos de las inscripciones: DNI,idTaller, fechaInscripcion y pago
     # Guardar inscripciones
-    with open("inscripciones.csv", "w") as fp:
-        writer = csv.writer(fp)
-        for insc in li:
-            dni = insc.persona().dni()
-            idt = insc.taller().idTaller()
-            fecha = insc.fechaInsc()
-            pago = insc.pago()
-            writer.writerow([dni, idt, fecha, pago])
+    mi.guardarInscripciones("inscripciones.csv")
