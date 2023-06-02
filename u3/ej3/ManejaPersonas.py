@@ -1,5 +1,10 @@
+from Persona import Persona
 
+class ManejaPersona():
 
-class Persona(list):
-    
-    def busca
+    def __init__(self):
+        self.__lp = []
+
+    def agregarPersona(self, p):
+        if isinstance(p, Persona):
+            self.__lp.append(p)
