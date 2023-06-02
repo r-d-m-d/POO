@@ -6,10 +6,17 @@ from Inscripcion import Inscripcion
 class ManejaInscipciones():
 
     def __init__(self, size=3, inc=3):
-        self.__size = size
-        self.__num = 0
-        self.__inc = inc
+        self.__dimension = size
+        self.__cantidad = 0
+        self.__incremento = inc
         self.__inscArr = np.ndarray(size, dtype=Inscripcion)
+
+    def agregarInscripcion(self, inscr):
+        if self.__cantidad == self.__dimension:
+            self.__dimension += self.__incremento
+            self.__inscArr.resize(self.__dimension)
+        self.__inscArr[self.__cantidad] = inscr
+        self.__cantidad += 1
 
     def mostrarInscripcionesTaller(self, tid):
         for insc in self.__inscArr:
@@ -19,26 +26,24 @@ class ManejaInscipciones():
     def guardarInscripciones(self, fn):
         with open(fn, "w") as fp:
             writer = csv.writer(fp)
-            for insc in self:
-                dni = insc.persona().dni()
-                idt = insc.taller().idTaller()
-                fecha = insc.fecha()
-                pago = insc.pago()
-                writer.writerow([dni, idt, fecha, pago])
-
-    def agregarInscripcion(self, inscr):
-        if self.__cantidad == self.__dimension:
-            self.__dimension += self.__incremento
-            self.__alumnos.resize(self.__dimension)
-        self.__alumnos[self.__cantidad] = inscr
-        self.__cantidad += 1
+            for insc in self.__inscArr:
+                if isinstance(insc, Inscripcion):
+                    dni = insc.persona().dni()
+                    idt = insc.taller().idTaller()
+                    fecha = insc.fechaInsc()
+                    pago = insc.pago()
+                    writer.writerow([dni, idt, fecha, pago])
 
     def buscarInscripcionPorDni(self, dni):
         i = 0
-        while i < len(self.__inscArr) and self.__inscArr[i].persona().dni() != dni:
+        while i < len(self.__inscArr)\
+                and isinstance(self.__inscArr[i], Inscripcion)\
+                and self.__inscArr[i].persona().dni() != dni:
             i += 1
         p = None
-        if i < len(self.__inscArr) and self.__inscArr[i].persona().dni() == dni:
+        if i < len(self.__inscArr)\
+                and isinstance(self.__inscArr[i], Inscripcion)\
+                and self.__inscArr[i].persona().dni() == dni:
             p = self.__inscArr[i]
         return p
 
@@ -55,7 +60,7 @@ class ManejaInscipciones():
     def consultarInscriptos(self, idt):
         s = ""
         for insc in self.__inscArr:
-            if insc.taller().idTaller() == tid:
+            if isinstance(insc, Inscripcion)  and insc.taller().idTaller() == idt:
                 s += str(insc.persona()) + "\n"
 
     def registrarPago(self, dni):
