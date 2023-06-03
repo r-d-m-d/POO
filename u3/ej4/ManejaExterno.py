@@ -15,7 +15,6 @@ class ManejaExterno:
         with open(fn) as fp:
             reader = csv.reader(fp)
             for line in reader:
-                print(line)
                 mviatico = int(line[7])
                 costoObra = int(line[8])
                 montoSDV = int(line[9])
