@@ -1,4 +1,4 @@
-from csv import csv
+import csv
 import numpy as np
 
 from Empleado import Empleado
@@ -13,7 +13,7 @@ class ManejaEmpleados:
         self.__tam = tam
         self.__num = 0
         self.__inc = inc
-        self.__arr = np.zeros(tam, dtype = Empleado)
+        self.__arr = np.empty(tam, dtype = Empleado)
 
     def cargarContratados(self, fn):
         with open(fn) as fp:
@@ -48,10 +48,11 @@ class ManejaEmpleados:
                 self.agregarEmpleado(ext)
 
     def agregarEmpleado(self, e):
+        print(e,f"  {self.__num} {self.__tam}")
         if isinstance(e, Empleado):
-            if self.__num >= self.__tam:
+            if self.__num == self.__tam:
                 self.__tam += self.__inc
-                self.__arr = self.__arr.resize(self.__tam)
+                self.__arr.resize(self.__tam)
             self.__arr[self.__num] = e
             self.__num += 1
 
@@ -61,12 +62,12 @@ class ManejaEmpleados:
 
     def totalTarea(self, tarea):
         i = 0
-        while i <len(self, self.__arr) and isinstance(self.__arr[i], Externo)\
+        while i <len(self.__arr) and isinstance(self.__arr[i], Externo)\
                 and (self.__arr[i].tareaFinalizada()\
                 or not self.__lext[i].tieneTarea(tarea)):
                     i +=1
         ext = None
-        if i < len(self.__arr) and isinstance(self.__arr[i])\
+        if i < len(self.__arr) and isinstance(self.__arr[i], Externo)\
                 and not self.__arr[i].tareaFinalizada()\
                 and self.__arr[i].tieneTarea(tarea):
             ext = self.__arr[i]
@@ -74,7 +75,7 @@ class ManejaEmpleados:
 
     def cobranMenosDe(self, sueldo):
         return [emp for emp in self.__arr if isinstance(emp, Empleado)
-                and emp.sueldo < sueldo]
+                and emp.sueldo() < sueldo]
 
     def mostrarSueldo(self):
         return [f"{e.nomb()} {e.tel()} {e.sueldo()}" for e in self.__arr
@@ -82,12 +83,12 @@ class ManejaEmpleados:
 
     def agregarHoras(self, dni: str, horas: int):
         i = 0
-        while i < len(self.__arr) and isinstance(self.__arr[i])\
-                and not self.__lcont[i].tieneDni(dni):
+        while i < len(self.__arr) and isinstance(self.__arr[i], Contratado)\
+                and not self.__arr[i].tieneDni(dni):
             i += 1
         emp = False
-        if i < len(self.__lcont) and self.__lcont[i].tieneDni(dni):
-            self.__lcont[i].agregarHoras(horas)
+        if i < len(self.__arr) and self.__arr[i].tieneDni(dni):
+            self.__arr[i].agregarHoras(horas)
             emp = True
         return emp
 
