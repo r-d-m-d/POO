@@ -9,24 +9,24 @@ class Nuevos(Vehiculo):
     def __init__(self, modelo, numero_puertas, color, precio, version):
         super().__init__(modelo, numero_puertas, color, precio)
         self.__version = version
-        if version == "Full":
-            self.__importe_venta = precio * (1+.1+.2)
-        else:
-            self.__importe_venta = precio * (1+.1)
 
 
     def version(self):
         return self.__version
 
     def importeVenta(self):
-        return self.__importe_venta
+        if self.__version == "Full":
+            importe_venta = self.precio() * (1+.1+.2)
+        else:
+            importe_venta = self.precio() * (1+.1)
+        return importe_venta
 
     def tipo(self):
         return "Nuevos"
 
     def __str__(self):
         r = super().__str__()
-        r += f"{self.__version} {self.__importe_venta}"
+        r += f"{self.__version} {self.importeVenta()}"
         return r
 
     def toJson(self):
