@@ -14,7 +14,6 @@ class Usado(Vehiculo):
         self.__patente = patente
         self.__anio = anio
         self.__kilometraje = kilometraje
-        self.__importe_venta = precio * (1 - self.__descuento())
 
     def marca(self):
         return self.__marca
@@ -29,7 +28,7 @@ class Usado(Vehiculo):
         return self.__kilometraje
 
     def importeVenta(self):
-        return self.__importe_venta
+        return self.precio() * (1 - self.__descuento())
 
     def __descuento(self):
         descu = (Usado.__anio - self.__anio) / 100
@@ -40,7 +39,7 @@ class Usado(Vehiculo):
 
     def __str__(self):
         r = super().__str__()
-        r += f"{self.__marca} {self.__patente} {self.__anio} {self.__kilometraje} {self.__importe_venta}"
+        r += f"{self.__marca} {self.__patente} {self.__anio} {self.__kilometraje} {self.importeVenta()}"
         return r
 
     def toJson(self):
@@ -48,6 +47,7 @@ class Usado(Vehiculo):
                 __class__ = self.__class__.__name__,
                 __atributos__ = dict(
                     modelo = self.modelo(),
+                    patente = self.patente(),
                     numero_puertas = self.numeroPuertas(),
                     color = self.color(),
                     precio = self.precio(),
