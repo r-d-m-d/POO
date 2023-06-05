@@ -18,7 +18,9 @@ class Vehiculo:
     def color(self):
         return self.__color
 
-    def precio(self):
+    def precio(self, nuevoPrecio=None):
+        if isinstance(nuevoPrecio, int):
+            self.__precio = nuevoPrecio
         return self.__precio
 
     def tipo(self):
@@ -28,4 +30,5 @@ class Vehiculo:
         return f"{self.__modelo} {self.__numero_puertas} {self.__color} {self.__precio}"
 
 
-
+    def toJson(self):
+        pass
