@@ -17,3 +17,6 @@ class Nodo:
 
     def getSiguiente(self):
         return self.__sig
+    
+    def toJson(self):
+        return self.__vehiculo.toJson()
