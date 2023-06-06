@@ -85,8 +85,13 @@ class Lista:
         n = Nodo(v)
         self.agregarElemento(n)
 
+    def insertar_personal(self, p, pos):
+        n = Nodo(p)
+        self.insertarElemento(n, pos)
+
     def contiene_elemento(self, v):
         c = self.__inicio
         while c is not None and c.getDato() != v:
             c = c.getSiguiente()
         return c.getDato() == v if c is not None else False
+
