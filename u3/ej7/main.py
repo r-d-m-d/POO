@@ -1,4 +1,5 @@
 import json
+
 from Docente import Docente
 from Investigador import Investigador
 from PersonalDeApoyo import PersonalDeApoyo
@@ -24,25 +25,27 @@ class Main:
         d['carrera'] = input("Ingrese la carrera: ")
         d['cargo'] = input("Ingrese el cargo: ")
         d['catedra'] = input("Ingrese una catedra: ")
-        return Docente(d)
+        return d
 
     def crearInvestigador(self):
         d = self.__crearPersona()
         # Investigador
         d['area'] = input("Ingrese el area: ")
         d['tipo'] = input("Ingrese el tipo")
-        return Investigador(d)
+        return d
 
     def crearPersonalDeApoyo(self):
         d = self.__crearPersona()
         d['categoria'] = input("Ingrese la categoria: ")
-        return PersonalDeApoyo(d)
+        return d
 
     def crearDocenteInvestigador(self):
-        d = self.__crearPersona()
+        d = self.crearDocente()
+        d['area'] = input("Ingrese el area: ")
+        d['tipo'] = input("Ingrese el tipo")
         d['categoria_investigacion'] = input("Ingrese la categoria_investigacion: ")
         d['importe_extra'] = input("Ingrese el importe_extra: ")
-        return DocenteInvestigador(d)
+        return d
 
 
 if __name__ == "__main__":
@@ -67,12 +70,16 @@ if __name__ == "__main__":
             an = input("Ingrese una opcion")
             if an == "1":
                 d = m.crearDocente()
+                doc = Docente(d)
             elif an == "2":
                 d = m.crearInvestigador()
+                inv = Investigador(d)
             elif an == "3":
                 d = m.crearPersonalDeApoyo()
+                pp = PersonalDeApoyo(d)
             elif an == "4":
                 d = m.crearDocenteInvestigador()
+                di = DocenteInvestigador(d)
         elif opcion == '2':
             # Tarea: Agregar agentes a la colección
             pass
