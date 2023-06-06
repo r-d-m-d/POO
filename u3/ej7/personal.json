@@ -1,0 +1,267 @@
+[
+    {
+        "__class__": "DocenteInvestigador",
+        "__atributos__": {
+            "cuil": "8547445652",
+            "apellido": "Gonz\u00e1lez",
+            "nombre": "Mar\u00eda",
+            "sueldo_basico": 50000,
+            "antiguedad": 3,
+            "area": "Biolog\u00eda Molecular",
+            "tipo": "Experimental",
+            "carrera": "Biolog\u00eda",
+            "cargo": "Profesor",
+            "catedra": "Gen\u00e9tica",
+            "categoria_investigacion": "Investigador Asociado",
+            "importe_extra": 2000
+        }
+    },
+    {
+        "__class__": "DocenteInvestigador",
+        "__atributos__": {
+            "cuil": "7381453523",
+            "apellido": "L\u00f3pez",
+            "nombre": "Juan",
+            "sueldo_basico": 55000,
+            "antiguedad": 5,
+            "area": "F\u00edsica de Part\u00edculas",
+            "tipo": "Te\u00f3rica",
+            "carrera": "F\u00edsica",
+            "cargo": "Profesor",
+            "catedra": "Mec\u00e1nica Cu\u00e1ntica",
+            "categoria_investigacion": "Investigador Principal",
+            "importe_extra": 3000
+        }
+    },
+    {
+        "__class__": "DocenteInvestigador",
+        "__atributos__": {
+            "cuil": "4449255877",
+            "apellido": "Mart\u00ednez",
+            "nombre": "Carlos",
+            "sueldo_basico": 45000,
+            "antiguedad": 2,
+            "area": "Aprendizaje Autom\u00e1tico",
+            "tipo": "Aplicada",
+            "carrera": "Inform\u00e1tica",
+            "cargo": "Profesor",
+            "catedra": "Inteligencia Artificial",
+            "categoria_investigacion": "Investigador Adjunto",
+            "importe_extra": 1500
+        }
+    },
+    {
+        "__class__": "DocenteInvestigador",
+        "__atributos__": {
+            "cuil": "1498795822",
+            "apellido": "Rodr\u00edguez",
+            "nombre": "Luis",
+            "sueldo_basico": 60000,
+            "antiguedad": 4,
+            "area": "Qu\u00edmica de Materiales",
+            "tipo": "Experimental",
+            "carrera": "Qu\u00edmica",
+            "cargo": "Profesor",
+            "catedra": "Qu\u00edmica Org\u00e1nica",
+            "categoria_investigacion": "Investigador Adjunto",
+            "importe_extra": 1800
+        }
+    },
+    {
+        "__class__": "DocenteInvestigador",
+        "__atributos__": {
+            "cuil": "2450383597",
+            "apellido": "G\u00f3mez",
+            "nombre": "Ana",
+            "sueldo_basico": 52000,
+            "antiguedad": 6,
+            "area": "Geometr\u00eda",
+            "tipo": "Te\u00f3rica",
+            "carrera": "Matem\u00e1ticas",
+            "cargo": "Profesor",
+            "catedra": "\u00c1lgebra Lineal",
+            "categoria_investigacion": "Investigador Asociado",
+            "importe_extra": 2500
+        }
+    },
+    {
+        "__class__": "PersonalDeApoyo",
+        "__atributos__": {
+            "cuil": "3162580050",
+            "apellido": "Gonz\u00e1lez",
+            "nombre": "Mar\u00eda",
+            "sueldo_basico": 35000,
+            "antiguedad": 3,
+            "categoria": "Administrativo"
+        }
+    },
+    {
+        "__class__": "PersonalDeApoyo",
+        "__atributos__": {
+            "cuil": "3600078579",
+            "apellido": "L\u00f3pez",
+            "nombre": "Juan",
+            "sueldo_basico": 40000,
+            "antiguedad": 5,
+            "categoria": "T\u00e9cnico"
+        }
+    },
+    {
+        "__class__": "PersonalDeApoyo",
+        "__atributos__": {
+            "cuil": "1487274912",
+            "apellido": "Mart\u00ednez",
+            "nombre": "Carlos",
+            "sueldo_basico": 30000,
+            "antiguedad": 2,
+            "categoria": "Administrativo"
+        }
+    },
+    {
+        "__class__": "PersonalDeApoyo",
+        "__atributos__": {
+            "cuil": "3490323869",
+            "apellido": "Rodr\u00edguez",
+            "nombre": "Luis",
+            "sueldo_basico": 38000,
+            "antiguedad": 4,
+            "categoria": "T\u00e9cnico"
+        }
+    },
+    {
+        "__class__": "PersonalDeApoyo",
+        "__atributos__": {
+            "cuil": "9089434049",
+            "apellido": "G\u00f3mez",
+            "nombre": "Ana",
+            "sueldo_basico": 32000,
+            "antiguedad": 6,
+            "categoria": "Administrativo"
+        }
+    },
+    {
+        "__class__": "Docente",
+        "__atributos__": {
+            "cuil": "2816599878",
+            "apellido": "Gonz\u00e1lez",
+            "nombre": "Mar\u00eda",
+            "sueldo_basico": 45000,
+            "antiguedad": 3,
+            "carrera": "Biolog\u00eda",
+            "cargo": "Profesor",
+            "catedra": "Gen\u00e9tica"
+        }
+    },
+    {
+        "__class__": "Docente",
+        "__atributos__": {
+            "cuil": "7383678771",
+            "apellido": "L\u00f3pez",
+            "nombre": "Juan",
+            "sueldo_basico": 50000,
+            "antiguedad": 5,
+            "carrera": "F\u00edsica",
+            "cargo": "Profesor",
+            "catedra": "Mec\u00e1nica Cu\u00e1ntica"
+        }
+    },
+    {
+        "__class__": "Docente",
+        "__atributos__": {
+            "cuil": "8333402139",
+            "apellido": "Mart\u00ednez",
+            "nombre": "Carlos",
+            "sueldo_basico": 40000,
+            "antiguedad": 2,
+            "carrera": "Inform\u00e1tica",
+            "cargo": "Profesor",
+            "catedra": "Inteligencia Artificial"
+        }
+    },
+    {
+        "__class__": "Docente",
+        "__atributos__": {
+            "cuil": "1649043319",
+            "apellido": "Rodr\u00edguez",
+            "nombre": "Luis",
+            "sueldo_basico": 55000,
+            "antiguedad": 4,
+            "carrera": "Qu\u00edmica",
+            "cargo": "Profesor",
+            "catedra": "Qu\u00edmica Org\u00e1nica"
+        }
+    },
+    {
+        "__class__": "Docente",
+        "__atributos__": {
+            "cuil": "5994118428",
+            "apellido": "G\u00f3mez",
+            "nombre": "Ana",
+            "sueldo_basico": 48000,
+            "antiguedad": 6,
+            "carrera": "Matem\u00e1ticas",
+            "cargo": "Profesor",
+            "catedra": "\u00c1lgebra Lineal"
+        }
+    },
+    {
+        "__class__": "Investigador",
+        "__atributos__": {
+            "cuil": "2960010885",
+            "apellido": "Gonz\u00e1lez",
+            "nombre": "Mar\u00eda",
+            "sueldo_basico": 55000,
+            "antiguedad": 3,
+            "area": "Biolog\u00eda Molecular",
+            "tipo": "Experimental"
+        }
+    },
+    {
+        "__class__": "Investigador",
+        "__atributos__": {
+            "cuil": "8509786073",
+            "apellido": "L\u00f3pez",
+            "nombre": "Juan",
+            "sueldo_basico": 60000,
+            "antiguedad": 5,
+            "area": "F\u00edsica de Part\u00edculas",
+            "tipo": "Te\u00f3rica"
+        }
+    },
+    {
+        "__class__": "Investigador",
+        "__atributos__": {
+            "cuil": "8652220548",
+            "apellido": "Mart\u00ednez",
+            "nombre": "Carlos",
+            "sueldo_basico": 50000,
+            "antiguedad": 2,
+            "area": "Inform\u00e1tica",
+            "tipo": "Aplicada"
+        }
+    },
+    {
+        "__class__": "Investigador",
+        "__atributos__": {
+            "cuil": "4523241529",
+            "apellido": "Rodr\u00edguez",
+            "nombre": "Luis",
+            "sueldo_basico": 65000,
+            "antiguedad": 4,
+            "area": "Qu\u00edmica de Materiales",
+            "tipo": "Experimental"
+        }
+    },
+    {
+        "__class__": "Investigador",
+        "__atributos__": {
+            "cuil": "5053563461",
+            "apellido": "G\u00f3mez",
+            "nombre": "Ana",
+            "sueldo_basico": 58000,
+            "antiguedad": 6,
+            "area": "Matem\u00e1ticas",
+            "tipo": "Te\u00f3rica"
+        }
+    }
+]
