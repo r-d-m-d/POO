@@ -94,4 +94,4 @@ class Lista:
         return c.getDato() == v if c is not None else False
 
     def toJson(self):
-        return [ n.toJson() for n in self]
+        return [n.toJson() for n in self]
