@@ -1,11 +1,10 @@
-import json
-
+from Personal import Personal
 from Docente import Docente
 from Investigador import Investigador
 from PersonalDeApoyo import PersonalDeApoyo
 from DocenteInvestigador import DocenteInvestigador
+from ManejaPersonal import ManejaPersonal
 
-filename = "personal.json"
 
 
 class Main:
@@ -47,9 +46,32 @@ class Main:
         d['importe_extra'] = input("Ingrese el importe_extra: ")
         return d
 
+    def crearPersonal(self):
+        print("1)Docente")
+        print("2)Investigador")
+        print("3)Personal de apoyo")
+        print("4)Docente Investigador")
+        an = input("Ingrese una opcion")
+        pers = None
+        if an == "1":
+            d = m.crearDocente()
+            pers = Docente(d)
+        elif an == "2":
+            d = m.crearInvestigador()
+            pers = Investigador(d)
+        elif an == "3":
+            d = m.crearPersonalDeApoyo()
+            pers = PersonalDeApoyo(d)
+        elif an == "4":
+            d = m.crearDocenteInvestigador()
+            pers = DocenteInvestigador(d)
+        return pers
+
 
 if __name__ == "__main__":
     m = Main()
+    mp = ManejaPersonal()
+    mp.cargarArchivo()  # utilizo el parametro por defecto
     print("1) Insertar agentes a la colección")
     print("2) Agregar agentes a la colección")
     print("3) Mostrar tipo de agente en una posición")
@@ -57,47 +79,52 @@ if __name__ == "__main__":
     print("5) Contar agentes por área de investigación")
     print("6) Listado de agentes ordenado por apellido")
     print("7) Listado de docentes investigadores por categoría")
+    print("8) Guardar")
     print("0) Salir")
     opcion = input("Ingrese el número de la opción deseada: ")
 
     while opcion != '0':
         if opcion == '1':
             # Tarea: Insertar agentes a la colección
-            print("1)Docente")
-            print("2)Investigador")
-            print("3)Personal de apoyo")
-            print("4)Docente Investigador")
-            an = input("Ingrese una opcion")
-            if an == "1":
-                d = m.crearDocente()
-                doc = Docente(d)
-            elif an == "2":
-                d = m.crearInvestigador()
-                inv = Investigador(d)
-            elif an == "3":
-                d = m.crearPersonalDeApoyo()
-                pp = PersonalDeApoyo(d)
-            elif an == "4":
-                d = m.crearDocenteInvestigador()
-                di = DocenteInvestigador(d)
+            pers = m.crearPersonal()
+            pos = int(input("Ingrese la posicion: "))
+            mp.insertar(pers, pos)
         elif opcion == '2':
             # Tarea: Agregar agentes a la colección
-            pass
+            pers = m.crearPersonal()
+            mp.agregarPersonal(pers)
         elif opcion == '3':
             # Tarea: Mostrar tipo de agente en una posición
-            pass
+            pos = int(input("Ingrese una posicion: "))
+            pers = mp.obtenerElemento(pos)
+            if isinstance(pers, Personal):
+                print(pers.tipo())
+            else:
+                print("Elemento no encontrado")
         elif opcion == '4':
             # Tarea: Listado de docentes investigadores por carrera
-            pass
+            d = mp.listarDocenteInvestigadoresPorCarrera()
+            for k in d.keys():
+                for e in d[k]:
+                    print(f'{k}: {e}')
         elif opcion == '5':
             # Tarea: Contar agentes por área de investigación
-            pass
+            dcont = mp.contarAgentesPorAreaDeInvestigacion()
+            for area in dcont.keys():
+                print(f"{area}: {dcont[area]}")
         elif opcion == '6':
             # Tarea: Listado de agentes ordenado por apellido
-            pass
+            lpersonal = mp.agentesOrdenadosPorApellido()
+            for personal in lpersonal:
+                print(personal)
         elif opcion == '7':
             # Tarea: Listado de docentes investigadores por categoría
-            pass
+            dipc = mp.docentesInvestigadoresPorCategoria()
+            for categoria in dipc.keys():
+                print(f"{categoria} {dipc[categoria]}")
+        elif opcion == '8':
+            # Tarea: Guardar en archivo personal.json
+            mp.guardar()
         else:
             print("Opción inválida. Por favor, elija una opción válida.")
         print("1) Insertar agentes a la colección")
@@ -107,6 +134,7 @@ if __name__ == "__main__":
         print("5) Contar agentes por área de investigación")
         print("6) Listado de agentes ordenado por apellido")
         print("7) Listado de docentes investigadores por categoría")
+        print("8) Guardar")
         print("0) Salir")
         opcion = input("Ingrese el número de la opción deseada: ")
 

@@ -23,3 +23,14 @@ class PersonalDeApoyo(Personal):
 
     def sueldo(self):
         return self.sueldo_basico() + self.bono_por_categoria() + self.bono_por_antiguedad()
+
+    def toJson(self):
+        d = Personal.toJson(self)
+        d['__atributos__'].update(
+                {"categoria": self.__categoria}
+                )
+        d['__class__'] = self.__class__.__name__
+        return d
+
+    def tipo(self):
+        return "PersonalDeApoyo"

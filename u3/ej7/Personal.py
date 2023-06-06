@@ -27,3 +27,23 @@ class Personal:
     def sueldo(self):
         pass
 
+    def __lt__(self, o):
+        return self.__apellido < o.__apellido
+
+    def __str__(self):
+        return f"{self.apellido()} {self.nombre()}"
+
+    def toJson(self):
+        d ={"__class__":self.__class__.__name__,
+            "__atributos__":{
+                "cuil": self.cuil(),
+                "apellido": self.apellido(),
+                "nombre": self.nombre(),
+                "sueldo_basico": self.sueldo_basico(),
+                "antiguedad": self.antiguedad(),
+
+                }}
+        return d
+
+    def tipo(self):
+        pass

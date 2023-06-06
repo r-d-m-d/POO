@@ -29,3 +29,15 @@ class Docente(Personal):
     def sueldo(self):
         return self.sueldo_basico() + self.bono_por_cargo() + self.bono_por_antiguedad()
 
+    def toJson(self):
+        d = Personal.toJson(self)
+        d['__atributos__'].update({
+                     "carrera": self.__carrera,
+                     "cargo": self.__cargo,
+                     "catedra": self.__catedra
+                     })
+        d['__class__'] = self.__class__.__name__
+        return d
+
+    def tipo(self):
+        return "Docente"

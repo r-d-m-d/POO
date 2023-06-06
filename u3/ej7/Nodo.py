@@ -2,7 +2,7 @@ from Personal import Personal
 
 
 class Nodo:
-    __personal: Agente
+    __personal: Personal
     __siguiente: object
 
     def __init__(self, personal):
@@ -13,7 +13,7 @@ class Nodo:
         self.__sig = nodo
 
     def getDato(self):
-        return self.__vehiculo
+        return self.__personal
 
     def getSiguiente(self):
         return self.__sig
