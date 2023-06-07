@@ -132,3 +132,11 @@ class ManejaPersonal:
         pers = self.buscarPersonaPorDni(dni)
         if isinstance(pers, DocenteInvestigador):
             pers.importe_extra(nuevoImporteExtra)
+# ITesorero
+
+    def gastosSueldoPorEmpleado(self, dni):
+        pers = self.buscarPersonaPorDni(dni)
+        sueldo = None
+        if isinstance(pers, Personal):
+            sueldo = pers.sueldo()
+        return sueldo
