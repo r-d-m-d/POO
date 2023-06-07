@@ -8,7 +8,9 @@ class PersonalDeApoyo(Personal):
         super().__init__(**kwargs)
         self.__categoria = kwargs['categoria']
 
-    def categoria(self):
+    def categoria(self, categoria):
+        if isinstance(categoria, int) and 1 <= categoria <= 22:
+            self.__categoria = categoria
         return self.__categoria
 
     def bono_por_categoria(self):

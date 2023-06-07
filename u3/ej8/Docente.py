@@ -1,5 +1,6 @@
 from Personal import Personal
 
+
 class Docente(Personal):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -10,12 +11,14 @@ class Docente(Personal):
     def carrera(self):
         return self.__carrera
 
-    def cargo(self):
+    def cargo(self, cargo=None):
+        if cargo in ['simple', 'semiexclusivo', 'exclusivo']:
+            self.__cargo = cargo
         return self.__cargo
 
     def catedra(self):
         return self.__catedra
-
+# Consulta como setear el porcentaje por cargo
     def bono_por_cargo(self):
         p = 0
         if self.__cargo == 'simple':
@@ -41,3 +44,4 @@ class Docente(Personal):
 
     def tipo(self):
         return "Docente"
+

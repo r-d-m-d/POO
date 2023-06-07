@@ -1,3 +1,4 @@
+from zope.interface import implementer
 import json
 
 from Personal import Personal
@@ -7,11 +8,14 @@ from PersonalDeApoyo import PersonalDeApoyo
 from DocenteInvestigador import DocenteInvestigador
 from Nodo import Nodo
 from Lista import Lista
+from IDirector import IDirector
+from ITesorero import ITesorero
 
 
 filename = "personal.json"
 
-
+@implementer(IDirector)
+@implementer(ITesorero)
 class ManejaPersonal:
 
     def __init__(self):
@@ -98,6 +102,33 @@ class ManejaPersonal:
     def guardar(self):
         with open(filename, "w", encoding="utf-8") as fp:
             json.dump(self.__lp.toJson(), fp, indent=4)
-#        for x in self.__lp.toJson():
-#            print(x)
+    
+    def buscarPersonaPorDni(self, dni):
+        i = iter(self.__lv)
+        pers = next(i, False)
+        while pers.dni() != dni:
+            pers = next(i, False)
+        if pers.dni() != dni:
+            pers = None
+        return pers
+# IDirector
 
+    def modificarBasico(self, dni, nuevoBasico):
+        pers = self.buscarPersonaPorDni(dni)
+        if isinstance(pers, Personal):
+            pers.sueldo_basico(nuevoBasico)
+
+    def modificarPorcentajePorCargo(self, dni, nuevoCargo):
+        pers = self.buscarPersonaPorDni(dni)
+        if isinstance(pers, Docente):
+            pers.cargo(nuevoCargo)
+
+    def modificarPorcentajeporcategoria(self, dni, categoria):
+        pers = self.buscarPersonaPorDni(dni)
+        if isinstance(pers, PersonalDeApoyo):
+            pers.categoria(categoria)
+
+    def modificarImporteExtra(self, dni, nuevoImporteExtra):
+        pers = self.buscarPersonaPorDni(dni)
+        if isinstance(pers, DocenteInvestigador):
+            pers.importe_extra(nuevoImporteExtra)

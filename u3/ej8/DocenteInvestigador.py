@@ -12,7 +12,9 @@ class DocenteInvestigador(Docente, Investigador):
     def categoria_investigacion(self):
         return self.__categoria_investigacion
 
-    def importe_extra(self):
+    def importe_extra(self, importe_extra):
+        if isinstance(importe_extra, int):
+            self.__importe_extra = importe_extra
         return self.__importe_extra
 
     def sueldo(self):

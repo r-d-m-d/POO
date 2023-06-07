@@ -23,29 +23,19 @@ class ITesorero (Interface)
    def gastosSueldoPorEmpleado ( dni):
 
        pass
-
- 
-
 class IDirector (Interface)
 
    def modificarBasico(dni, nuevoBasico):
-
        pass
 
    def modificarPorcentajeporcargo(dni, nuevoPorcentaje):
-
-     pass
+       pass
 
    def modificarPorcentajeporcategoría(dni, nuevoPorcentaje):
-
        pass
 
-def modificarImporteExtra(dni, nuevoImporteExtra):
-
+   def modificarImporteExtra(dni, nuevoImporteExtra):
        pass
-
- 
-
 En el programa principal agregue una opción para el Tesorero y un menú de
 opciones para Director. Para ello deberá autenticar al usuario que quiere
 acceder, si es tesorero, accederá a las funcionalidades de tesorero y si es

@@ -6,7 +6,7 @@ class IDirector(Interface):
     def modificarBasico(dni, nuevoBasico):
         pass
 
-    def modificarPorcentajeporcargo(dni, nuevoPorcentaje):
+    def modificarPorcentajeporcargo(dni, nuevoCargo):
         pass
 
     def modificarPorcentajeporcategoría(dni, nuevoPorcentaje):

@@ -15,8 +15,11 @@ class Personal:
     def nombre(self):
         return self.__nombre
 
-    def sueldo_basico(self):
+    def sueldo_basico(self, sueldo_basico=None):
+        if isinstance(sueldo_basico, int):
+            self.__sueldo_basico = sueldo_basico
         return self.__sueldo_basico
+
 
     def antiguedad(self):
         return self.__antiguedad
