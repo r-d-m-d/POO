@@ -3,14 +3,14 @@ from zope.interface import Interface
 
 class IDirector(Interface):
 
-    def modificarBasico(dni, nuevoBasico):
+    def modificarBasico(self,dni, nuevoBasico):
         pass
 
-    def modificarPorcentajeporcargo(dni, nuevoCargo):
+    def modificarPorcentajeporcargo(self,dni, nuevoCargo):
         pass
 
-    def modificarPorcentajeporcategoría(dni, nuevoPorcentaje):
+    def modificarPorcentajeporcategoría(self,dni, nuevoPorcentaje):
         pass
 
-    def modificarImporteExtra(dni, nuevoImporteExtra):
+    def modificarImporteExtra(self,dni, nuevoImporteExtra):
         pass
