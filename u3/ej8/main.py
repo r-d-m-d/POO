@@ -1,13 +1,81 @@
+from hashlib import sha512
+
 from Personal import Personal
 from Docente import Docente
 from Investigador import Investigador
 from PersonalDeApoyo import PersonalDeApoyo
 from DocenteInvestigador import DocenteInvestigador
+from ITesorero import ITesorero
+from IDirector import IDirector
 from ManejaPersonal import ManejaPersonal
 
 
-
 class Main:
+    
+    def __init__(self):
+        self.__tesorero = False
+        self.__director = False
+
+    def ingresarTesorero(self):
+        HASH = "7f7b41e2cdede12daf8671b00f81386621e2f4b145dbb44d48a88ff7d3dcaa45079599f53bc784e5c1305733636fa31fcef138e96e351f8cce199ebbb948b123"
+        usuario = input("Ingrese el usuario: ")
+        passwd = input("Ingrese la contraseña: ")
+        upHash = sha512(usuario.encode())
+        upHash.update(passwd.encode())
+        self.__tesorero = upHash.hexdigest() == HASH
+        return upHash.hexdigest() == HASH
+
+    def menuTesorero(self, mt: ITesorero):
+        if self.__tesorero:
+            dni = input("Ingrese dni o s para salir")
+            while dni.lower() != 's':
+                sueldo = mt.gastosSueldoPorEmpleado(dni)
+                print("El gasto es: ", sueldo)
+                dni = input("Ingrese dni o s para salir")
+            self.__tesorero = False
+
+    def ingresarDirector(self):
+        HASH = "dd0373f733f79c983e922cea2dba737b03980f731f995828d32b4d78fd64c604ea050551e06d2494ffcf7849fba49036994a0bbc545580ee9a780dd211b6fa30"
+        u = input("Ingrese el usuario:  ")
+        p = input("Ingrese la contraseña: ")
+        uph = sha512(u.encode())
+        uph.update(p.encode())
+        self.__director = uph.hexdigest() == HASH
+        return self.__director
+
+    def menuDirector(self, md: IDirector):
+        dni = ""
+        if self.__director:
+            print("1) modificar basico")
+            print("2) modificar porcentaje por cargo")
+            print("3) modificar porcentaje por categoria")
+            print("4) modficar importe extra")
+            print("s) salir")
+            opc = input("Ingrese una opcion")
+            while opc.lower() != 's':
+                dni = input("Ingrese el dni")
+                if opc == "1":
+                    b = input("Ingrese el nuevo basico: ")
+                    md.modificarBasico(dni, b)
+                elif opc == "2":
+                    p = input("Ingrese el nuevo cargo ")
+                    md.modificarPorcentajeporcargo(dni, p)
+                elif opc == "3":
+                    c = int(input("Ingrese categoria[1;22]: "))
+                    md.modificarPorcentajeporcategoría(dni, c)
+                elif opc == "4":
+                    ie = int(input("Ingrese importe extra: "))
+                    md.modificarImporteExtra(dni, ie)
+                elif opc.lower() != 's':
+                    print("Ingrese una opcion valida")
+                print("1) modificar basico")
+                print("2) modificar porcentaje por cargo")
+                print("3) modificar porcentaje por categoria")
+                print("4) modficar importe extra")
+                print("s) salir")
+                opc = input("Ingrese una opcion")
+            self.__director = False
+
     def __crearPersona(self):
         #  SOLO creara un diccionario con los atributos
         d = {}
@@ -80,9 +148,10 @@ if __name__ == "__main__":
     print("6) Listado de agentes ordenado por apellido")
     print("7) Listado de docentes investigadores por categoría")
     print("8) Guardar")
+    print("D) Ingresar como director")
+    print("T) Ingresar como tesorero")
     print("0) Salir")
     opcion = input("Ingrese el número de la opción deseada: ")
-
     while opcion != '0':
         if opcion == '1':
             # Tarea: Insertar agentes a la colección
@@ -125,6 +194,14 @@ if __name__ == "__main__":
         elif opcion == '8':
             # Tarea: Guardar en archivo personal.json
             mp.guardar()
+        elif opcion.lower() == 'd':
+            ingreso = m.ingresarDirector()
+            if ingreso:
+                m.menuDirector(mp)
+        elif opcion.lower() == 't':
+            ingreso = m.ingresarTesorero()
+            if ingreso:
+                m.menuTesorero(mp)
         else:
             print("Opción inválida. Por favor, elija una opción válida.")
         print("1) Insertar agentes a la colección")
@@ -135,6 +212,8 @@ if __name__ == "__main__":
         print("6) Listado de agentes ordenado por apellido")
         print("7) Listado de docentes investigadores por categoría")
         print("8) Guardar")
+        print("D) Ingresar como director")
+        print("T) Ingresar como tesorero")
         print("0) Salir")
         opcion = input("Ingrese el número de la opción deseada: ")
 
