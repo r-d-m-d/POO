@@ -54,7 +54,7 @@ class Calculadora(object):
         else:
             self.__operadorAux=None
             valor=self.__panel.get()
-            self.__primerOperando=int(valor)
+            self.__primerOperando=float(valor)
             self.__panel.set(numero)
     def borrarPanel(self):
         self.__panel.set('0')
@@ -75,7 +75,7 @@ class Calculadora(object):
     def ponerOPERADOR(self, op):
         if op=='=':
             operacion=self.__operador.get()
-            self.__segundoOperando=int(self.__panel.get())
+            self.__segundoOperando=float(self.__panel.get())
             self.resolverOperacion(self.__primerOperando, operacion, self.__segundoOperando)
             self.__operador.set('')
             self.__operadorAux=None
