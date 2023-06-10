@@ -49,6 +49,7 @@ class Calculadora(object):
         ttk.Button(mainframe, text='*', command=partial(self.ponerOPERADOR, '*')).grid(column=1, row=7, sticky=W)
         ttk.Button(mainframe, text='/', command=partial(self.ponerOPERADOR, '/')).grid(column=2, row=7, sticky=W)
         ttk.Button(mainframe, text='=', command=partial(self.ponerOPERADOR, '=')).grid(column=3, row=7, sticky=W)
+        ttk.Button(mainframe, text="C", command=self.borrarPanel).grid(row=0, column=4, sticky=E)
         self.__panel.set('0')
         panelEntry.focus()
         self.__ventana.mainloop()
@@ -61,17 +62,19 @@ class Calculadora(object):
             valor = self.__panel.get()
             self.__primerOperando = float(valor)
             self.__panel.set(numero)
+
     def borrarPanel(self):
         self.__panel.set('0')
+
     def resolverOperacion(self, operando1, operacion, operando2):
-        resultado = 0
+        resultado = Complejo(0, 0)
         if operacion == '+':
             resultado = operando1+operando2
-        elif: operacion == '-':
+        elif operacion == '-':
                 resultado = operando1-operando2
-        elif: operacion == '*':
+        elif operacion == '*':
             resultado = operando1*operando2
-        elif: operacion == '/':
+        elif operacion == '/':
             resultado = operando1/operando2
         self.__panel.set(str(resultado))
 
