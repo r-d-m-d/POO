@@ -3,16 +3,19 @@
 Created on Sat Feb 29 23:03:53 2020
 @author: morte
 """
-from tkinter import *
-from tkinter import ttk
+# from tkinter import *
+from tkinter import ttk, Tk, N, W, E, S, StringVar
 from functools import partial
+
+
 class Calculadora(object):
-    __ventana=None
-    __operador=None
-    __panel=None
-    __operadorAux=None
-    __primerOperando=None
-    __segundoOperando=None
+    __ventana = None
+    __operador = None
+    __panel = None
+    __operadorAux = None
+    __primerOperando = None
+    __segundoOperando = None
+
     def __init__(self):
         self.__ventana = Tk()
         self.__ventana.title('Tk-Calculadora')
@@ -23,10 +26,10 @@ class Calculadora(object):
         mainframe['borderwidth'] = 2
         mainframe['relief'] = 'sunken'
         self.__panel = StringVar()
-        self.__operador=StringVar()
-        self.__operadorAux=None
-        operatorEntry=ttk.Entry(mainframe, width=10, textvariable=self.__operador, justify='center', state='disabled')
-        operatorEntry.grid(column=1, row=1, columnspan=1, sticky=(W,E))
+        self.__operador = StringVar()
+        self.__operadorAux = None
+        operatorEntry = ttk.Entry(mainframe, width=10, textvariable=self.__operador, justify='center', state='disabled')
+        operatorEntry.grid(column=1, row=1, columnspan=1, sticky=(W, E))
         panelEntry = ttk.Entry(mainframe, width=20, textvariable=self.__panel, justify='right',state='disabled')
         panelEntry.grid(column=2, row=1, columnspan=2, sticky=(W, E))
         ttk.Button(mainframe, text='1', command=partial(self.ponerNUMERO, '1')).grid(column=1, row=3, sticky=W)
@@ -48,49 +51,54 @@ class Calculadora(object):
         panelEntry.focus()
         self.__ventana.mainloop()
     def ponerNUMERO(self, numero):
-        if self.__operadorAux==None:
+        if self.__operadorAux == None:
             valor = self.__panel.get()
             self.__panel.set(valor+numero)
         else:
-            self.__operadorAux=None
-            valor=self.__panel.get()
-            self.__primerOperando=float(valor)
+            self.__operadorAux = None
+            valor = self.__panel.get()
+            self.__primerOperando = float(valor)
             self.__panel.set(numero)
     def borrarPanel(self):
         self.__panel.set('0')
     def resolverOperacion(self, operando1, operacion, operando2):
-        resultado=0
-        if operacion=='+':
-            resultado=operando1+operando2
+        resultado = 0
+        if operacion == '+':
+            resultado = operando1+operando2
         else:
-            if operacion=='-':
-                resultado=operando1-operando2
+            if operacion == '-':
+                resultado = operando1-operando2
             else:
-                if operacion=='*':
-                    resultado=operando1*operando2
+                if operacion == '*':
+                    resultado = operando1*operando2
                 else:
-                    if operacion=='/':
-                        resultado=operando1/operando2
+                    if operacion == '/':
+                        resultado = operando1/operando2
         self.__panel.set(str(resultado))
+
     def ponerOPERADOR(self, op):
-        if op=='=':
-            operacion=self.__operador.get()
-            self.__segundoOperando=float(self.__panel.get())
-            self.resolverOperacion(self.__primerOperando, operacion, self.__segundoOperando)
+        if op == ' = ':
+            operacion = self.__operador.get()
+            self.__segundoOperando = float(self.__panel.get())
+            self.resolverOperacion(self.__primerOperando, operacion,
+                                   self.__segundoOperando)
             self.__operador.set('')
-            self.__operadorAux=None
+            self.__operadorAux = None
         else:
-            if self.__operador.get()=='':
+            if self.__operador.get() == '':
                 self.__operador.set(op)
-                self.__operadorAux=op
+                self.__operadorAux = op
             else:
-                operacion=self.__operador.get()
-                self.__segundoOperando=int(self.__panel.get())
-                self.resolverOperacion(self.__primerOperando, operacion, self.__segundoOperando)
+                operacion = self.__operador.get()
+                self.__segundoOperando = int(self.__panel.get())
+                self.resolverOperacion(self.__primerOperando, operacion,
+                                       self.__segundoOperando)
                 self.__operador.set(op)
-                self.__operadorAux=op
+                self.__operadorAux = op
+
+
 def main():
-    calculadora=Calculadora()
-    
-if __name__=='__main__':
+    calculadora = Calculadora()
+
+if __name__ == '__main__':
     main()
