@@ -7,6 +7,8 @@ Created on Sat Feb 29 23:03:53 2020
 from tkinter import ttk, Tk, N, W, E, S, StringVar
 from functools import partial
 
+from Complejo import Complejo
+
 
 class Calculadora(object):
     __ventana = None
@@ -33,14 +35,14 @@ class Calculadora(object):
         panelEntry = ttk.Entry(mainframe, width=20, textvariable=self.__panel, justify='right',state='disabled')
         panelEntry.grid(column=2, row=1, columnspan=2, sticky=(W, E))
         ttk.Button(mainframe, text='1', command=partial(self.ponerNUMERO, '1')).grid(column=1, row=3, sticky=W)
-        ttk.Button(mainframe, text='2', command=partial(self.ponerNUMERO,'2')).grid(column=2, row=3, sticky=W)
-        ttk.Button(mainframe, text='3', command=partial(self.ponerNUMERO,'3')).grid(column=3, row=3, sticky=W)
-        ttk.Button(mainframe, text='4', command=partial(self.ponerNUMERO,'4')).grid(column=1, row=4, sticky=W)
-        ttk.Button(mainframe, text='5', command=partial(self.ponerNUMERO,'5')).grid(column=2, row=4, sticky=W)
-        ttk.Button(mainframe, text='6', command=partial(self.ponerNUMERO,'6')).grid(column=3, row=4, sticky=W)
-        ttk.Button(mainframe, text='7', command=partial(self.ponerNUMERO,'7')).grid(column=1, row=5, sticky=W)
-        ttk.Button(mainframe, text='8', command=partial(self.ponerNUMERO,'8')).grid(column=2, row=5, sticky=W)
-        ttk.Button(mainframe, text='9', command=partial(self.ponerNUMERO,'9')).grid(column=3, row=5, sticky=W)
+        ttk.Button(mainframe, text='2', command=partial(self.ponerNUMERO, '2')).grid(column=2, row=3, sticky=W)
+        ttk.Button(mainframe, text='3', command=partial(self.ponerNUMERO, '3')).grid(column=3, row=3, sticky=W)
+        ttk.Button(mainframe, text='4', command=partial(self.ponerNUMERO, '4')).grid(column=1, row=4, sticky=W)
+        ttk.Button(mainframe, text='5', command=partial(self.ponerNUMERO, '5')).grid(column=2, row=4, sticky=W)
+        ttk.Button(mainframe, text='6', command=partial(self.ponerNUMERO, '6')).grid(column=3, row=4, sticky=W)
+        ttk.Button(mainframe, text='7', command=partial(self.ponerNUMERO, '7')).grid(column=1, row=5, sticky=W)
+        ttk.Button(mainframe, text='8', command=partial(self.ponerNUMERO, '8')).grid(column=2, row=5, sticky=W)
+        ttk.Button(mainframe, text='9', command=partial(self.ponerNUMERO, '9')).grid(column=3, row=5, sticky=W)
         ttk.Button(mainframe, text='0', command=partial(self.ponerNUMERO, '0')).grid(column=1, row=6, sticky=W)
         ttk.Button(mainframe, text='+', command=partial(self.ponerOPERADOR, '+')).grid(column=2, row=6, sticky=W)
         ttk.Button(mainframe, text='-', command=partial(self.ponerOPERADOR, '-')).grid(column=3, row=6, sticky=W)
@@ -65,15 +67,12 @@ class Calculadora(object):
         resultado = 0
         if operacion == '+':
             resultado = operando1+operando2
-        else:
-            if operacion == '-':
+        elif: operacion == '-':
                 resultado = operando1-operando2
-            else:
-                if operacion == '*':
-                    resultado = operando1*operando2
-                else:
-                    if operacion == '/':
-                        resultado = operando1/operando2
+        elif: operacion == '*':
+            resultado = operando1*operando2
+        elif: operacion == '/':
+            resultado = operando1/operando2
         self.__panel.set(str(resultado))
 
     def ponerOPERADOR(self, op):
@@ -84,17 +83,16 @@ class Calculadora(object):
                                    self.__segundoOperando)
             self.__operador.set('')
             self.__operadorAux = None
+        elif self.__operador.get() == '':
+            self.__operador.set(op)
+            self.__operadorAux = op
         else:
-            if self.__operador.get() == '':
-                self.__operador.set(op)
-                self.__operadorAux = op
-            else:
-                operacion = self.__operador.get()
-                self.__segundoOperando = int(self.__panel.get())
-                self.resolverOperacion(self.__primerOperando, operacion,
-                                       self.__segundoOperando)
-                self.__operador.set(op)
-                self.__operadorAux = op
+            operacion = self.__operador.get()
+            self.__segundoOperando = int(self.__panel.get())
+            self.resolverOperacion(self.__primerOperando, operacion,
+                                   self.__segundoOperando)
+            self.__operador.set(op)
+            self.__operadorAux = op
 
 
 def main():
