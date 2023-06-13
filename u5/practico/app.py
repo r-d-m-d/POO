@@ -34,7 +34,7 @@ def login():
                                                 request.form['contrasena'])
             # devolver un template de bienvenida como panel.html o algo asi
             if verif:
-                session['name'] = request.form.get("Usuario")
+                session['name'] = usuario.nombre
                 return redirect(f'/panel/preceptor/{usuario.nombre}')
             else:
                 return render_template('login.html', verif=False)
@@ -47,9 +47,9 @@ def login():
 @app.route('/panel', methods=['post', 'get'])
 @app.route('/panel/<string:tipo_usuario>/<string:nombre>')
 def panel(tipo_usuario=None, nombre=None):
-    if tipo_usuario is None or nombre is None:
-        return redirect('/')
-    return render_template('panel.html', nombre=nombre)
+    if session['name'] and session['name'] == nombre:
+        return render_template('panel.html', tipo_usuario=tipo_usuario, nombre=nombre)
+    return redirect('/')
 
 
 if __name__ == "__main__":
