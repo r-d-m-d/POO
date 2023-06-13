@@ -15,8 +15,10 @@
  <nav>
     <ul>
     <li><a href="#">Inicio</a></li>
+    {% if tipo_usuario == "preceptor" %}
     <li><a href="#">Registrar Asistencia</a></li>
     <li><a href="#">Informe Detallado</a></li>
+    {% endif %}
     <li><a href="#">Log out</a></li>
     </ul>
  </nav> 
