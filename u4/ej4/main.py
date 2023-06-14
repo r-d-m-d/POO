@@ -8,9 +8,16 @@ Created on Sat Feb 29 23:03:53 2020
 from tkinter import *
 from tkinter import ttk
 from functools import partial
-
+import re
 from Complejo import Complejo
 
+
+class functionWrapper:
+    def __init__(self, fn=None):
+        self.fn = fn
+
+    def __call__(self):
+        self.fn()
 
 class Calculadora(object):
     __ventana=None
@@ -19,6 +26,7 @@ class Calculadora(object):
     __operadorAux=None
     __primerOperando=None
     __segundoOperando=None
+
     def __init__(self):
         self.__ventana = Tk()
         self.__ventana.title('Tk-Calculadora')
@@ -31,6 +39,8 @@ class Calculadora(object):
         self.__panel = StringVar()
         self.__operador=StringVar()
         self.__operadorAux=None
+        self.__cmdSuma = functionWrapper(partial(self.ponerNUMERO, '+'))
+        self.__cmdResta = functionWrapper(partial(self.ponerNUMERO, '-'))
         operatorEntry=ttk.Entry(mainframe, width=10, textvariable=self.__operador, justify='center', state='disabled')
         operatorEntry.grid(column=1, row=1, columnspan=1, sticky=(W,E))
         panelEntry = ttk.Entry(mainframe, width=20, textvariable=self.__panel, justify='right',state='disabled')
@@ -45,26 +55,43 @@ class Calculadora(object):
         ttk.Button(mainframe, text='8', command=partial(self.ponerNUMERO,'8')).grid(column=2, row=5, sticky=W)
         ttk.Button(mainframe, text='9', command=partial(self.ponerNUMERO,'9')).grid(column=3, row=5, sticky=W)
         ttk.Button(mainframe, text='0', command=partial(self.ponerNUMERO, '0')).grid(column=1, row=6, sticky=W)
-        ttk.Button(mainframe, text='+', command=partial(self.ponerOPERADOR, '+')).grid(column=2, row=6, sticky=W)
-        ttk.Button(mainframe, text='-', command=partial(self.ponerOPERADOR, '-')).grid(column=3, row=6, sticky=W)
+        ttk.Button(mainframe, text='+', command=self.__cmdSuma).grid(column=2, row=6, sticky=W)
+        ttk.Button(mainframe, text='-', command=self.__cmdResta).grid(column=3, row=6, sticky=W)
         ttk.Button(mainframe, text='*', command=partial(self.ponerOPERADOR, '*')).grid(column=1, row=7, sticky=W)
         ttk.Button(mainframe, text='/', command=partial(self.ponerOPERADOR, '/')).grid(column=2, row=7, sticky=W)
-        ttk.Button(mainframe, text='i', command=partial(self.ponerOPERADOR, 'i')).grid(column=1, row=8, sticky=W)
+        ttk.Button(mainframe, text='i', command=self.poneri).grid(column=2, row=8, sticky=W)
         ttk.Button(mainframe, text='=', command=partial(self.ponerOPERADOR, '=')).grid(column=3, row=7, sticky=W)
+        ttk.Button(mainframe, text='<=', command=self.borrarCaracter).grid(column=1, row=8, sticky=W)
         self.__panel.set('0')
         panelEntry.focus()
         self.__ventana.mainloop()
+        
+    def borrarCaracter(self):
+        valor = self.__panel.get()
+        valor = valor[:len(valor)-1]
+        self.__panel.set(valor)
+
+    def poneri(self):
+        sval = self.__panel.get()
+        sval = sval + 'i' if not sval.endswith('i') else sval
+        self.__panel.set(sval)
+
     def ponerNUMERO(self, numero):
-        if self.__operadorAux==None:
-            valor = self.__panel.get()
+        valor = self.__panel.get()
+        if self.__operadorAux is None:
             self.__panel.set(valor+numero)
         else:
-            self.__operadorAux=None
-            valor=self.__panel.get()
-            self.__primerOperando=Complejo(float(valor), 0)
+            self.__operadorAux = None
+            self.__primerOperando = self.obtenerComplejo(valor)
             self.__panel.set(numero)
+        if numero in ['+', '-']:
+            self.__cmdSuma.fn = partial(self.ponerOPERADOR, '+')
+            self.__cmdResta.fn = partial(self.ponerOPERADOR, '-')
+
+
     def borrarPanel(self):
         self.__panel.set('0')
+        
     def resolverOperacion(self, operando1, operacion, operando2):
         resultado=0
         if operacion=='+':
@@ -74,25 +101,34 @@ class Calculadora(object):
         elif operacion=='*':
             resultado=operando1*operando2
         elif operacion=='/':
-            resultado=operando1/operando2
+            resultado=operando1.__div__(operando2)
         self.__panel.set(str(resultado))
 
     def ponerOPERADOR(self, op):
-        operacion=self.__operador.get()
-        if op=='=':
-            self.__segundoOperando=Complejo(float(self.__panel.get()),0)
+        operacion = self.__operador.get()
+        if op == '=':
+            self.__segundoOperando = self.obtenerComplejo(self.__panel.get())
             self.resolverOperacion(self.__primerOperando, operacion, self.__segundoOperando)
             self.__operador.set('')
-            self.__operadorAux=None
+            self.__operadorAux = None
         else:
-            if operacion =='':
+            if operacion == '':
                 self.__operador.set(op)
-                self.__operadorAux=op
+                self.__operadorAux = op
             else:
-                self.__segundoOperando=Complejo(float(self.__panel.get()), 0)
+                self.__segundoOperando = self.obtenerComplejo(self.__panel.get())
                 self.resolverOperacion(self.__primerOperando, operacion, self.__segundoOperando)
                 self.__operador.set(op)
-                self.__operadorAux=op
+                self.__operadorAux = op
+        self.__cmdSuma.fn = partial(self.ponerNUMERO, '+')
+        self.__cmdResta.fn = partial(self.ponerNUMERO, '-')
+
+
+    def obtenerComplejo(self, sVal):
+        crx = re.compile(r'(-?\d+(.\d+)?)([+-]\d+(.\d+)?)i')
+        mc = crx.match(sVal)
+        real, _, img, _ = mc.groups() if mc is not None else (0,0,0,0)
+        return Complejo(float(real), float(img))
 
 def main():
     calculadora=Calculadora()
