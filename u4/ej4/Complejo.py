@@ -5,8 +5,14 @@ class Complejo:
     __img: float
 
     def __init__(self, re, img):
-        self.__re = re
-        self.__img = img
+        if isinstance(re, float) or isinstance(re, int):
+            self.__re = re
+        else:
+            raise ValueError("Parte real no numerica")
+        if isinstance(img, float) or isinstance(img, int):
+            self.__img = img
+        else:
+            raise ValueError("Parte imaginaria no numerica")
 
     def re(self, re=None):
         if isinstance(re, float) or isinstance(re, int):
@@ -37,7 +43,7 @@ class Complejo:
             rtn = self.__mul__(c)
         return rtn
 
-    def div(self, o):
+    def __div__(self, o):
         rtn = 0
         if isinstance(o, Complejo):
             d = o.__re**2 + o.__img ** 2
@@ -56,8 +62,8 @@ class Complejo:
         return rtn
 
     def __str__(self):
-#        return f"{self.__re}+{self.__img}i"
-        return f"{self.__re}"
+        return f"{self.__re}{self.__img:+}i"
+#        return f"{self.__re}"
 
     def __eq__(self, o):
         return self.__re == o.__re and self.__img == o.__img
