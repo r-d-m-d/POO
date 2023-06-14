@@ -8,13 +8,14 @@ Modificado Sab May 06 11:40:00 2023
 from tkinter import *
 from tkinter import ttk, messagebox
 
-from ObtenerDolar import obtenerDorlar
+from ObtenerDolar import APIDeDolar
 
 class Aplicacion():
     __ventana=None
     __pulgadas=None
     __centimetros=None
     def __init__(self):
+        self.__precioVenta = APIDeDolar("https://www.dolarsi.com/api/api.php?type=dolar").precio()
         self.__ventana = Tk()
         self.__ventana.geometry('290x115')
         self.__ventana.title('Conversor de moneda')
@@ -43,7 +44,7 @@ class Aplicacion():
         if self.dolaresEntry.get()!='':
             try:
                 valor=float(self.dolaresEntry.get())
-                self.__pesos.set(obtenerDorlar()*valor)
+                self.__pesos.set(self.__precioVenta*valor)
             except ValueError:
                 messagebox.showerror(title='Error de tipo',
                                      message='Debe ingresar un valor numérico')
