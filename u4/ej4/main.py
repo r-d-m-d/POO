@@ -10,14 +10,8 @@ from tkinter import ttk
 from functools import partial
 import re
 from Complejo import Complejo
+from EnvoltorioDeFuncion import EnvoltorioDeFuncion
 
-
-class functionWrapper:
-    def __init__(self, fn=None):
-        self.fn = fn
-
-    def __call__(self):
-        self.fn()
 
 class Calculadora(object):
     __ventana=None
@@ -39,11 +33,11 @@ class Calculadora(object):
         self.__panel = StringVar()
         self.__operador=StringVar()
         self.__operadorAux=None
-        self.__cmdSuma = functionWrapper(partial(self.ponerNUMERO, '+'))
-        self.__cmdResta = functionWrapper(partial(self.ponerNUMERO, '-'))
-        operatorEntry=ttk.Entry(mainframe, width=10, textvariable=self.__operador, justify='center', state='disabled')
+        self.__cmdSuma = EnvoltorioDeFuncion(partial(self.ponerNUMERO, '+'))
+        self.__cmdResta = EnvoltorioDeFuncion(partial(self.ponerNUMERO, '-'))
+        operatorEntry=ttk.Label(mainframe, width=10, textvariable=self.__operador, justify='center', state='disabled', background="white", borderwidth=2, relief="groove")
         operatorEntry.grid(column=1, row=1, columnspan=1, sticky=(W,E))
-        panelEntry = ttk.Entry(mainframe, width=20, textvariable=self.__panel, justify='right',state='disabled')
+        panelEntry = ttk.Label(mainframe, width=20, textvariable=self.__panel, justify='right',state='disabled', background="white", borderwidth=2, relief="groove")
         panelEntry.grid(column=2, row=1, columnspan=2, sticky=(W, E))
         ttk.Button(mainframe, text='1', command=partial(self.ponerNUMERO, '1')).grid(column=1, row=3, sticky=W)
         ttk.Button(mainframe, text='2', command=partial(self.ponerNUMERO,'2')).grid(column=2, row=3, sticky=W)
@@ -85,8 +79,8 @@ class Calculadora(object):
             self.__primerOperando = self.obtenerComplejo(valor)
             self.__panel.set(numero)
         if numero in ['+', '-']:
-            self.__cmdSuma.fn = partial(self.ponerOPERADOR, '+')
-            self.__cmdResta.fn = partial(self.ponerOPERADOR, '-')
+            self.__cmdSuma.fn(partial(self.ponerOPERADOR, '+'))
+            self.__cmdResta.fn(partial(self.ponerOPERADOR, '-'))
 
 
     def borrarPanel(self):
@@ -120,8 +114,9 @@ class Calculadora(object):
                 self.resolverOperacion(self.__primerOperando, operacion, self.__segundoOperando)
                 self.__operador.set(op)
                 self.__operadorAux = op
-        self.__cmdSuma.fn = partial(self.ponerNUMERO, '+')
-        self.__cmdResta.fn = partial(self.ponerNUMERO, '-')
+        if 'i' in self.__panel.get():
+            self.__cmdSuma.fn(partial(self.ponerNUMERO, '+'))
+            self.__cmdResta.fn(partial(self.ponerNUMERO, '-'))
 
 
     def obtenerComplejo(self, sVal):
