@@ -5,7 +5,7 @@ import json
 from generos import AlmacenGeneros
 # Temporales
 
-from peliculas import Pelicula
+from peliculas import Pelicula, ManejaPelicula
 
 class PeliculaList(tk.Frame):
     def __init__(self, master, **kwargs):
@@ -139,26 +139,3 @@ class PeliculaView(tk.Tk):
     #Ver estado de Contacto en formulario de contactos
     def verPeliculaEnForm(self, titulo, lo, fl, gen, overview):
         self.form.mostrarEstadoPeliculaEnFormulario(titulo, lo, fl, gen, overview)
-
-
-if __name__ == "__main__":
-    ag = AlmacenGeneros()
-    pv = PeliculaView()
-    d = {}
-    with open("pelis.json") as fp:
-        d = json.load(fp)
-        results = d['results']
-    lp = [Pelicula(**res) for res in results]
-    for pelicula in lp:
-        pv.agregarPelicula(pelicula.title())
-
-    pv.seleccionarPelicula(
-        lambda x:
-            pv.verPeliculaEnForm(lp[x].title()
-                                 , lp[x].original_language()
-                                 , lp[x].release_date()
-                                 , ag.obtenerGenerosStr(lp[x].genre_ids())
-                                 , lp[x].overview())
-    )
-
-    pv.mainloop()
