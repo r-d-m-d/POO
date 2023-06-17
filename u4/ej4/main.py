@@ -10,7 +10,6 @@ from tkinter import ttk
 from functools import partial
 import re
 from Complejo import Complejo
-from EnvoltorioDeFuncion import EnvoltorioDeFuncion
 
 
 class Calculadora(object):
@@ -33,8 +32,8 @@ class Calculadora(object):
         self.__panel = StringVar()
         self.__operador=StringVar()
         self.__operadorAux=None
-        self.__cmdSuma = EnvoltorioDeFuncion(partial(self.ponerNUMERO, '+'))
-        self.__cmdResta = EnvoltorioDeFuncion(partial(self.ponerNUMERO, '-'))
+        self.__cmdSuma = partial(self.ponerNUMERO, '+')
+        self.__cmdResta = partial(self.ponerNUMERO, '-')
         operatorEntry=ttk.Label(mainframe, width=10, textvariable=self.__operador, justify='center', state='disabled', background="white", borderwidth=2, relief="groove")
         operatorEntry.grid(column=1, row=1, columnspan=1, sticky=(W,E))
         panelEntry = ttk.Label(mainframe, width=20, textvariable=self.__panel, justify='right',state='disabled', background="white", borderwidth=2, relief="groove")
@@ -49,8 +48,10 @@ class Calculadora(object):
         ttk.Button(mainframe, text='8', command=partial(self.ponerNUMERO,'8')).grid(column=2, row=5, sticky=W)
         ttk.Button(mainframe, text='9', command=partial(self.ponerNUMERO,'9')).grid(column=3, row=5, sticky=W)
         ttk.Button(mainframe, text='0', command=partial(self.ponerNUMERO, '0')).grid(column=1, row=6, sticky=W)
-        ttk.Button(mainframe, text='+', command=self.__cmdSuma).grid(column=2, row=6, sticky=W)
-        ttk.Button(mainframe, text='-', command=self.__cmdResta).grid(column=3, row=6, sticky=W)
+        self.bSuma = ttk.Button(mainframe, text='+', command=self.__cmdSuma)
+        self.bSuma.grid(column=2, row=6, sticky=W)
+        self.bResta = ttk.Button(mainframe, text='-', command=self.__cmdResta)
+        self.bResta.grid(column=3, row=6, sticky=W)
         ttk.Button(mainframe, text='*', command=partial(self.ponerOPERADOR, '*')).grid(column=1, row=7, sticky=W)
         ttk.Button(mainframe, text='/', command=partial(self.ponerOPERADOR, '/')).grid(column=2, row=7, sticky=W)
         ttk.Button(mainframe, text='i', command=self.poneri).grid(column=2, row=8, sticky=W)
@@ -79,9 +80,9 @@ class Calculadora(object):
             self.__primerOperando = self.obtenerComplejo(valor)
             self.__panel.set(numero)
         if numero in ['+', '-']:
-            self.__cmdSuma.fn(partial(self.ponerOPERADOR, '+'))
-            self.__cmdResta.fn(partial(self.ponerOPERADOR, '-'))
-
+            print("poner numero: ",numero)
+            self.bSuma.config(command=partial(self.ponerOPERADOR, '+'))
+            self.bResta.config(command=partial(self.ponerOPERADOR, '-'))
 
     def borrarPanel(self):
         self.__panel.set('0')
@@ -115,8 +116,9 @@ class Calculadora(object):
                 self.__operador.set(op)
                 self.__operadorAux = op
         if 'i' in self.__panel.get():
-            self.__cmdSuma.fn(partial(self.ponerNUMERO, '+'))
-            self.__cmdResta.fn(partial(self.ponerNUMERO, '-'))
+            print("poner operador: ", op)
+            self.bSuma.config(command=partial(self.ponerNUMERO, '+'))
+            self.bResta.config(command=partial(self.ponerNUMERO, '-'))
 
 
     def obtenerComplejo(self, sVal):
