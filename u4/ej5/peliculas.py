@@ -97,16 +97,26 @@ class ManejaPelicula:
 
     def __init__(self):
         self.__pelis = []
-        with open('pelis.json') as fp:
+        with open('peliculas.json') as fp:
             page = json.load(fp)
             results = page['results']
             for dpeli in results:
                 opeli = Pelicula(**dpeli)
                 self.__pelis.append(opeli)
 
+    def enlistartTitulos(self, cb):
+        for p in self.__pelis:
+            cb(p.title())
 
     def muestra_pelis(self):
         return [f'{peli}' for peli in self.__pelis]
+
+    def obtenerDescripcion(self, pos, ag):
+        return [self.__pelis[pos].title(),
+                self.__pelis[pos].original_language(),
+                self.__pelis[pos].release_date(),
+                ag.obtenerGenerosStr(self.__pelis[pos].genre_ids()),
+                self.__pelis[pos].overview()]
 
 
 if __name__ == "__main__":
