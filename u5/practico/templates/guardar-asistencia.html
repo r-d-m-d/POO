@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Guardar Asistencia</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{url_for('static', filename= 'css/estilos.css')}}">
+   </head>
+   <body>
+      <header>
+         <h2>Colegio San Miguel</h2>
+      </header>
+      <section>
+         <nav>
+            <ul>
+               <li><a href="/panel">Inicio</a></li>
+               {% if tipo_usuario == "preceptor" %}
+               <li><a href="/seleccionar-curso">Registrar Asistencia</a></li>
+               <li><a href="#">Informe Detallado</a></li>
+               {% endif %}
+               <li><a href="/logout">Log out</a></li>
+            </ul>
+         </nav> 
+      </section>
+      <p> guardar asistencia</p>
+      <a href="#">Ver informe</a>
+
+   </body>
+</html>
