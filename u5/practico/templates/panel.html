@@ -14,17 +14,17 @@
 <section>
  <nav>
     <ul>
-    <li><a href="#">Inicio</a></li>
+    <li><a href="/panel">Inicio</a></li>
     {% if tipo_usuario == "preceptor" %}
-    <li><a href="#">Registrar Asistencia</a></li>
+    <li><a href="/seleccionar-curso">Registrar Asistencia</a></li>
     <li><a href="#">Informe Detallado</a></li>
     {% endif %}
-    <li><a href="#">Log out</a></li>
+    <li><a href="/logout">Log out</a></li>
     </ul>
  </nav> 
  <!-- si va a enviar datos al servidor use etiqueta form, si solo va a mostrar datos use la etiqueta article-->
- <h1>Bienvenido {{ nombre }}</h1>
 </section>
+ <h1>Buenos dias {{ nombre }}</h1>
 <footer>
     <p>Dirección y teléfono del colegio</p>
 </footer>
