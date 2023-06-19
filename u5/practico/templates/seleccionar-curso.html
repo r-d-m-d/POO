@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width">
+ <title>Colegio San Miguel</title>
+ 
+<link rel="stylesheet" href="{{url_for('static', filename= 'css/estilos.css')}}">
+</head>
+<body>
+<header>
+ <h2>Colegio San Miguel</h2>
+</header>
+<section>
+ <nav>
+    <ul>
+    <li><a href="/panel">Inicio</a></li>
+    {% if tipo_usuario == "preceptor" %}
+    <li><a href="/seleccionar-curso">Registrar Asistencia</a></li>
+    <li><a href="#">Informe Detallado</a></li>
+    {% endif %}
+    <li><a href="/logout">Log out</a></li>
+    </ul>
+ </nav> 
+ <!-- si va a enviar datos al servidor use etiqueta form, si solo va a mostrar datos use la etiqueta article-->
+</section>
+ <h1>Buenos dias {{ nombre }}</h1>
+<form method="POST" action="/registrar-asistencia">
+    <table>
+        <thead><tr><td>Año</td><td>Division</td></tr></thead>
+{% for curso in cursos %}
+<tr><td>{{curso.anio}}</td><td>{{curso.division}}</td>
+    <td><input type="radio" name="curso" value="{{curso.id}}" ></td></tr>
+{% endfor %}
+    </table>
+    <input type="submit" value="Seleccionar curso">
+</form>
+
+<footer>
+    <p>Dirección y teléfono del colegio</p>
+</footer>
+</body>
+</html>
