@@ -62,7 +62,7 @@ class Complejo:
         return rtn
 
     def __str__(self):
-        return f"{self.__re:.4}{self.__img:+.4}i"
+        return f"{self.__re:.6f}{self.__img:+.6f}i"
 #        return f"{self.__re}"
 
     def __eq__(self, o):
