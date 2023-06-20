@@ -1,5 +1,3 @@
-import json
-
 
 class Pelicula:
 
@@ -95,14 +93,11 @@ class Pelicula:
 
 class ManejaPelicula:
 
-    def __init__(self):
+    def __init__(self, results):
         self.__pelis = []
-        with open('peliculas.json') as fp:
-            page = json.load(fp)
-            results = page['results']
-            for dpeli in results:
-                opeli = Pelicula(**dpeli)
-                self.__pelis.append(opeli)
+        for dpeli in results:
+            opeli = Pelicula(**dpeli)
+            self.__pelis.append(opeli)
 
     def enlistartTitulos(self, cb):
         for p in self.__pelis:
