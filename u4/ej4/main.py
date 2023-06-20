@@ -80,7 +80,6 @@ class Calculadora(object):
             self.__primerOperando = self.obtenerComplejo(valor)
             self.__panel.set(numero)
         if numero in ['+', '-']:
-            print("poner numero: ",numero)
             self.bSuma.config(command=partial(self.ponerOPERADOR, '+'))
             self.bResta.config(command=partial(self.ponerOPERADOR, '-'))
 
@@ -116,7 +115,6 @@ class Calculadora(object):
                 self.__operador.set(op)
                 self.__operadorAux = op
         if 'i' in self.__panel.get():
-            print("poner operador: ", op)
             self.bSuma.config(command=partial(self.ponerNUMERO, '+'))
             self.bResta.config(command=partial(self.ponerNUMERO, '-'))
 
@@ -127,11 +125,10 @@ class Calculadora(object):
         real, _, img, _ = mc.groups() if mc is not None else (0,0,0,0)
         return Complejo(float(real), float(img))
 
+
 def main():
-    calculadora=Calculadora()
-    
+    calculadora = Calculadora()
+
+
 if __name__=='__main__':
     main()
-
-
-
