@@ -39,7 +39,7 @@ def login():
                 session['tipo'] = request.form['usuario-tipo']
                 session['id'] = usuario.id
                 print(session['id'])
-                return redirect(f'/panel/{usuario.__class__}/{usuario.nombre}')
+                return redirect(f'/panel/{usuario.__class__.__name__}/{usuario.nombre}')
             else:
                 return render_template('login.html', verif=False)
         else:
@@ -73,13 +73,12 @@ def seleccionar_curso():
     return redirect('/login')
 
 @app.route('/registrar-asistencia', methods=['POST'])
-def registrarAsistemcia():
+def registrarAsistencia():
     if request.method == 'POST':
         if request.form['curso']:
             curso_id = request.form['curso']
             # Pedir alumnos del cursoj
-            estudiantes = Estudiante.query.filter_by(idcurso=curso_id).all()
-            print(estudiantes)
+            estudiantes = Estudiante.query.filter_by(idcurso=curso_id).order_by(Estudiante.apellido).all()
             return render_template('registrar-asistencia.html', eds=estudiantes)
         else:
             print(type(request.form['estudiante']))
@@ -118,5 +117,12 @@ def guardar_asistencia():
     return render_template('guardar-asistencia.html', error = error)
     # Las inasistencias se registran para cualquier dia
 
+@app.route('/informe-detallado', methods=['get', 'post'])
+def informeDetallado():
+    # seleccionar curso
+    # mostrar tabla de asistencias por alumno
+    return "hoal"
+
 if __name__ == "__main__":
     app.run()
+    
