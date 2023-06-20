@@ -4,6 +4,9 @@
     <li><a href="#">Informe Detallado</a></li>
 {% endblock %}
 {% block content %}
- <h1>Buenos dias {{ nombre }}</h1>
+      <p> guardar asistencia</p>
+      {% if error %}
+      <p> {{error}}</p>
+      {% endif %}
+      <a href="#">Ver informe</a>
 {% endblock %}
-

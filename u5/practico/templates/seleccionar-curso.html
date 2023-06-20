@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block menu %}
+    <li><a href="/seleccionar-curso">Registrar Asistencia</a></li>
+    <li><a href="#">Informe Detallado</a></li>
+{% endblock %}
+{% block content %}
+ <h1>Buenos dias {{ nombre }}</h1>
+<form method="POST" action="/registrar-asistencia">
+    <table>
+        <thead><tr><td>Año</td><td>Division</td></tr></thead>
+        {% for curso in cursos %}
+        <tr><td>{{curso.anio}}</td><td>{{curso.division}}</td>
+            <td><input type="radio" name="curso" value="{{curso.id}}" ></td></tr>
+        {% endfor %}
+    </table>
+    <input type="submit" value="Seleccionar curso">
+</form>
+{% endblock %}

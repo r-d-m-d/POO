@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block menu %}
+
+<li><a href="/seleccionar-curso">Registrar Asistencia</a></li>
+<li><a href="#">Informe Detallado</a></li>
+{% endblock %}
+{% block content %}
+<h1>Registrar asistencia</h1>
+<section>
+    <form id="registrar-asistencia" method="POST" action="/guardar-asistencia">
+        {% if eds  %}
+        {% for ed in eds %}
+        <fieldset class="flex-column">
+            <legend>alumno {{ed.nombre}} {{ed.apellido}}</legend>
+            <label for="select-asistencia">Asistio? 
+                <select id="select-asistencia" name="{{ed.id}}" required="true">
+                    <option value="s" name="si" id="opt-si">Si</option>
+                    <option value="n" name="no" id="opt-no">No</option>
+                </select>
+            </label>
+            <label for="ed-fis">Educacion Fisica
+                <input type="radio" name="{{ed.id}}" value="2" id="ed-fis" required="true">
+            </label>
+            <label for="aula">Aula
+                <input type="radio" name="{{ed.id}}" value="1" id="aula" required="true">
+            </label>
+            <label for="fecha">Fecha
+                <input type="date" name="{{ed.id}}" required="true">
+            </label>
+            <label for="justificacion">Justificacion Falta <input type="text" name="{{ed.id}}"></label>
+        </fieldset>
+        {% endfor %}
+        {% endif %}
+        <input type="submit" value="Guardar Asistencia">
+    </form>
+
+</section>
+{% endblock %}
