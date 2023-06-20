@@ -44,7 +44,7 @@ class Aplicacion():
         if self.dolaresEntry.get()!='':
             try:
                 valor=float(self.dolaresEntry.get())
-                self.__pesos.set(self.__precioVenta*valor)
+                self.__pesos.set(f'{self.__precioVenta*valor:.2f}')
             except ValueError:
                 messagebox.showerror(title='Error de tipo',
                                      message='Debe ingresar un valor numérico')
