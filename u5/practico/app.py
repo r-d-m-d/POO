@@ -64,11 +64,14 @@ def panel(tipo_usuario=None, nombre=None):
 
 @app.route('/seleccionar-curso', methods=['post','get'])
 def seleccionar_curso():
-    if session['tipo'] and session['tipo'] == "preceptor":
+    tipo_sesion = session.get('tipo', False)
+    if tipo_sesion == "preceptor":
         # mostrar formulario de los cursos a cargo del Preceptor
-        cursos = Curso.query.filter_by(idpreceptor=session['id']).all()
-        print(cursos)
-        return render_template('seleccionar-curso.html', cursos=cursos)
+        idc = session.get('id', False)
+        if idc:
+            cursos = Curso.query.filter_by(idpreceptor=session['id']).all()
+            print(cursos)
+            return render_template('seleccionar-curso.html', cursos=cursos)
         # 
     return redirect('/login')
 
@@ -123,6 +126,6 @@ def informeDetallado():
     # mostrar tabla de asistencias por alumno
     return "hoal"
 
+
 if __name__ == "__main__":
     app.run()
-    
