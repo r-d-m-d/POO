@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block menu %}
-    <li><a href="/seleccionar-curso">Registrar Asistencia</a></li>
-    <li><a href="#">Informe Detallado</a></li>
+    <li><a href="/seleccionar-curso/registrar-asistencia">Registrar Asistencia</a></li>
+    <li><a href="/seleccionar-curso/informe-detallado">Informe Detallado</a></li>
 {% endblock %}
 {% block content %}
  <h1>Buenos dias {{ nombre }}</h1>
-<form method="POST" action="/registrar-asistencia">
+ <form method="POST" action="/{{redir}}">
     <table>
         <thead><tr><td>Año</td><td>Division</td></tr></thead>
         {% for curso in cursos %}
