@@ -73,3 +73,14 @@ form label{
   color: #FFFFFF;
   background-color: #00A4BD;
 }
+table{
+    border: 1px black solid;
+    text-align: center;
+}
+th{
+    border-right: 1px black solid;
+}
+td{
+    border: 1px black solid;
+    text-align: center;
+}
