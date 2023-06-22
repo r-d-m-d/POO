@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block menu %}
+    <li><a href="/seleccionar-curso/registrar-asistencia">Registrar Asistencia</a></li>
+    <li><a href="/seleccionar-curso/informe-detallado">Informe Detallado</a></li>
+{% endblock %}
+{% block content %}
+<table style="border: 1px solid">
+  <caption>Asistencias </caption>
+   <tr>
+    <th colspan="2" rowspan="2">Nombre</th>
+    <th colspan="2">Presentes</th>
+    <th colspan="2">Insistencias Justificadas</th>
+    <th colspan="2">Inasistencias injustificadas</th>
+    <th rowspan="2">Total inasistencias</th>
+  </tr>
+  <tr>
+    <td>Aula</td>
+    <td>Educacion Fisica</td>
+    <td>Aula</td>
+    <td>Educacion Fisica</td>
+    <td>Aula</td>
+    <td>Educacion Fisica</td>
+  </tr>
+{% for informe in informes %}
+  <tr>
+    <td>{{informe.nomb}}</td>
+    <td>{{informe.apel}}</td>
+    <td>{{informe.aula['presente']}}</td>
+    <td>{{informe.ed_fis['presente']}}</td>
+    <td>{{informe.aula['justificadas']}}</td>
+    <td>{{informe.ed_fis['justificadas']}}</td>
+    <td>{{informe.aula['nojustificadas']}}</td>
+    <td>{{informe.ed_fis['nojustificadas']}}</td>
+    <td>{{informe.total}}</td>
+  </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
