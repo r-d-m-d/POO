@@ -23,12 +23,12 @@ def login():
                 and request.form['usuario-tipo']:
             # comprobar usuario y contrasena
             verif = False
-            if request.form['usuario-tipo'] == 'preceptor':
+            if request.form['usuario-tipo'].lower() == 'preceptor':
                 usuario = Preceptor.query.filter_by(correo=request.form['Usuario']).first()
                 if isinstance(usuario, Preceptor):
                     verif = check_password_hash(usuario.clave,
                                                 request.form['contrasena'])
-            elif request.form['usuario-tipo'] == "padre":
+            elif request.form['usuario-tipo'].lower() == "padre":
                 usuario = Padre.query.filter_by(correo=request.form['Usuario']).first()
                 if isinstance(usuario, Padre):
                     verif = check_password_hash(usuario.clave,
@@ -55,24 +55,28 @@ def panel(tipo_usuario=None, nombre=None):
          and tipo_usuario in ['Preceptor', 'Padre']:
         return render_template('panel.html', tipo_usuario=tipo_usuario,
                                nombre=nombre)
-    elif (tipo_usuario is None or nombre is None) and (
-            session['name'] and session['tipo'] and session['id']):
+    elif session['name'] and session['tipo'] and session['id']:
         tipo_usuario = session.get('tipo', '')
         nombre_usuario = session.get('name', '')
         return redirect(f'/panel/{tipo_usuario}/{nombre_usuario}')
     return redirect('/')
 
-@app.route('/seleccionar-curso', methods=['post','get'])
-def seleccionar_curso():
-    tipo_sesion = session.get('tipo', False)
-    if tipo_sesion == "preceptor":
-        # mostrar formulario de los cursos a cargo del Preceptor
-        idc = session.get('id', False)
-        if idc:
-            cursos = Curso.query.filter_by(idpreceptor=session['id']).all()
-            print(cursos)
-            return render_template('seleccionar-curso.html', cursos=cursos)
-        # 
+
+@app.route('/seleccionar-curso/<string:redir>', methods=['post','get'])
+def seleccionar_curso(redir: str):
+    if redir in [ 'registrar-asistencia', 'informe-detallado']:
+        tipo_sesion = session.get('tipo', False)
+        if tipo_sesion == "Preceptor":
+            # mostrar formulario de los cursos a cargo del Preceptor
+            idc = session.get('id', False)
+            if idc:
+                cursos = Curso.query.filter_by(idpreceptor=session['id']).all()
+                print(cursos)
+                return render_template('seleccionar-curso.html', cursos=cursos,
+                                       redir=redir)
+            # 
+    else:
+        return redirect('/panel')
     return redirect('/login')
 
 @app.route('/registrar-asistencia', methods=['POST'])
@@ -94,20 +98,22 @@ def guardar_asistencia():
     error = None
     if request.method == 'POST':
         for id_estudiante in request.form.keys():
-        # verificar que el estudiante esta en el curso a cargo del preceptor
+            # verificar que el estudiante esta en el curso a cargo del preceptor
             estudiante = Estudiante.query.filter_by(id=id_estudiante).limit(1).first()
             if isinstance(estudiante, Estudiante):
                 prec_id = session.get('id', -1)
                 if estudiante.curso.idpreceptor == prec_id:
                     # Mal, deberia darle nombre a cada atributo
                     # sino depende del orden del formulario
-                    presente, tipo_clase, fecha, justificacion = request.form.getlist(id_estudiante)
+                    presente, tipo_clase, fecha, justificacion = request.form.getlist(f'{estudiante.id}')
+                    if justificacion == '':
+                        justificacion = None
                     dAsistencia = {'fecha': datetime.strptime(fecha,
-                                   "%Y-%m-%d").date(),
+                                                              "%Y-%m-%d").date(),
                                    'codigoclase': tipo_clase,
                                    'asistio': presente,
                                    'justificacion': justificacion,
-                                   'idestudiante': id_estudiante}
+                                   'idestudiante': estudiante.id}
                     asistencia = Asistencia(**dAsistencia)
                     db.session.add(asistencia)
                     db.session.commit()
@@ -118,13 +124,32 @@ def guardar_asistencia():
         ## asistencia = (id, fecha, codigo-clase, asistio, justificacion, idestudiante)
 
     return render_template('guardar-asistencia.html', error = error)
-    # Las inasistencias se registran para cualquier dia
+# Las inasistencias se registran para cualquier dia
 
 @app.route('/informe-detallado', methods=['get', 'post'])
 def informeDetallado():
-    # seleccionar curso
-    # mostrar tabla de asistencias por alumno
-    return "hoal"
+    if request.method == 'POST':
+        prec_id = session.get('id',False)
+        curso_id = request.form.get('curso', False)
+        if prec_id and curso_id:
+            # Obtener todos los estudiantes del curso
+            ests = Estudiante.query.filter_by(idcurso = curso_id)
+         # Contar las asistencias de cada alumno, segun los criterios especi
+            informes = []
+            for est in ests:
+                from InformeDetallado import InformeDetallado
+                informe = InformeDetallado(est.id, est.nombre, est.apellido)
+                asistencias_est = db.session.execute(
+                        db.select(
+                            Asistencia.asistio,Asistencia.justificacion,
+                            Asistencia.codigoclase
+                            ).where(Asistencia.idestudiante == est.id)).all()
+                for asistencia in asistencias_est:
+                    informe.agregarAsistencia(asistencia)
+                informes.append(informe)
+
+            return render_template("informe-detallado.html", informes=informes)
+    return redirect('/panel')
 
 
 if __name__ == "__main__":
