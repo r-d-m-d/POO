@@ -11,6 +11,9 @@ app.config.from_pyfile("config.py")
 from models import db
 from models import Preceptor,  Curso, Estudiante, Padre, Asistencia
 
+from InformeDetallado import InformeDetallado
+
+
 def check_password_hash(clave_hasheada, clave_formulario):
     hash_clave_formulario = md5(clave_formulario.encode()).hexdigest()
     return clave_hasheada == hash_clave_formulario
@@ -45,6 +48,9 @@ def login():
         else:
             return render_template('login.html', verif=True)
     elif request.method == 'GET':
+        if session.get('name', False) and session.get('tipo', False)\
+            and session.get('id', False):
+            return redirect('/panel')
         return render_template('login.html', verif=True)
 
 
@@ -117,13 +123,13 @@ def guardar_asistencia():
                     asistencia = Asistencia(**dAsistencia)
                     db.session.add(asistencia)
                     db.session.commit()
-                else: # supongamos que no es un padre 
+                else:  # supongamos que no es un padre
                     prec_name = session.get('name', '')
                     error += f'El preceptor {prec_name} no esta acargo del estudiante {estudiante.nombre}'
         # guardar asistencia en la base de datos
         ## asistencia = (id, fecha, codigo-clase, asistio, justificacion, idestudiante)
 
-    return render_template('guardar-asistencia.html', error = error)
+    return render_template('guardar-asistencia.html', error=error)
 # Las inasistencias se registran para cualquier dia
 
 @app.route('/informe-detallado', methods=['get', 'post'])
@@ -134,10 +140,8 @@ def informeDetallado():
         if prec_id and curso_id:
             # Obtener todos los estudiantes del curso
             ests = Estudiante.query.filter_by(idcurso = curso_id)
-         # Contar las asistencias de cada alumno, segun los criterios especi
             informes = []
             for est in ests:
-                from InformeDetallado import InformeDetallado
                 informe = InformeDetallado(est.id, est.nombre, est.apellido)
                 asistencias_est = db.session.execute(
                         db.select(
@@ -151,6 +155,12 @@ def informeDetallado():
             return render_template("informe-detallado.html", informes=informes)
     return redirect('/panel')
 
+@app.route('/logout')
+def logout():
+    session['name'] = None
+    session['tipo'] = None
+    session['id'] = None
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run()
