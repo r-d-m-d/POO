@@ -12,15 +12,20 @@ class controlador:
         self.pv = PeliculaView()
         #-- Configurar Manejador de peliculas
         #- obtener la informacion de la api 
-        resp = requests.get('https://api.themoviedb.org/3/discover/movie?page=1&api_key=51e0b298932d9b54c1521992a7dd529e')
-        if isinstance(resp, requests.models.Response) and resp.status_code == 200:
-            page = resp.json()
-        else:
+        try:
+            resp = requests.get('https://api.themoviedb.org/3/discover/movie?page=1&api_key=51e0b298932d9b54c1521992a7dd529e')
+            if isinstance(resp, requests.models.Response) and resp.status_code == 200:
+                page = resp.json()
+            else:
+                with open('peliculas.json') as fp:
+                    page = json.load(fp)
+            del (resp)
+        except Exception as e:
             with open('peliculas.json') as fp:
                 page = json.load(fp)
+
         results = page['results']
         self.mp = ManejaPelicula(results)
-        del (resp)
         del (page)
         del (results)
     # -- Configurar el view
@@ -29,7 +34,8 @@ class controlador:
     # pasa una callback, al seleccionar un item ejecuta la funcion lambda
         self.pv.seleccionarPelicula(
             lambda x:
-                self.pv.verPeliculaEnForm(*self.mp.obtenerDescripcion(x,self.ag))
+                self.pv.verPeliculaEnForm(*self.mp.obtenerDescripcion(x,
+                                                                      self.ag))
         )
 
         self.pv.mainloop()
